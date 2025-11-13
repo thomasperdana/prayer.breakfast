@@ -10,7 +10,7 @@
 
 ## Prayer Card Together
 ### Page 37 II—STUDYING: 3. Matthew 4:4
-
+  
 ## International Reading by TaeWoo Lee
 ### Finland—Lasse Schultz, Trustee (Hannele).
 ### USA Zone 3—John Ortega, Trustee (Pam).
@@ -18,14 +18,13 @@ Gideon and Auxiliary state and camp officers and members of Finland and USA Zone
 ### Ephesians 5:31
 
 ## State Reading by Alvin Beverly
-### Day 8
 ### Randy Bartlein (Mary) - STATE CHURCH MINISTRY COORDINATOR
 Your camp Church Ministry chairman: ____________________
 Camps: Baker County, Clay County South, JAX Northwest, JAX West
 ### Joshua 1:9
 
 ## Pray for the Widows by Donald Tise
-### Day 8 - North Region – NO7 (cont'd)
+### North Region – NO7 (cont'd)
 NE Volusia County - Kathryn Teter,
 West Volusia County - Jean Kerr, Carolyn McPhail, Lea Widener,
 
