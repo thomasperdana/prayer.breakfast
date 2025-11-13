@@ -6,10 +6,10 @@
 ## Opening Prayer by TaeWoo Lee
 
 ## Bible Reading Rotation 
-### Hebrews 11:1-19
+### Hebrews 11:1-19-19-19
 
 ## Prayer Card Together
-### Page 41 IV-WITNESSING 7.  Acts 1:8
+### Page 43 V—WATCHING 9. I Peter 4:7
 
 ## International Reading by TaeWoo Lee
 ### USA Zone 10—Jerry Clunan, Trustee (Rhea). USA Zone 11—Charley Lee Logwood, Trustee (Brenda). Gideon and Auxiliary state and camp officers and members of USA Zone 10—Delmardic, Pennsylvania, West Virginia. Also, USA Zone 11—North Carolina, South Carolina, Virginia. For those in danger of death through suicide, illness, or other reasons to be reached with the Gospel in time. Gideons and Auxiliary from Italy, Luxembourg, Malta, and the Netherlands. Mauritania*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Separated Walk.

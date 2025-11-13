@@ -6,7 +6,7 @@
 ## Opening Prayer by TaeWoo Lee
 
 ## Bible Reading Rotation 
-### Hebrews 11:1-19
+### Hebrews 11:1-19-19-19
 1 Now faith is the substance of things hoped for, the evidence of things not seen.
 2 For by it the elders obtained a good report.
 3 Through faith we understand that the worlds were framed by the word of God, so that things which are seen were not made of things which do appear.
@@ -43,7 +43,7 @@ was able to raise
 him up, even from the dead; from whence also he received him in a figure.
 
 ## Prayer Card Together
-### Page 41 IV-WITNESSING 7.  Acts 1:8
+### Page 43 V—WATCHING 9. I Peter 4:7
 4 But he answered and said,
 It is written, Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.
   

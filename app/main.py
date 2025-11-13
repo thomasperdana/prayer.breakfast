@@ -392,18 +392,20 @@ def execute_step_2_brr():
                 if match:
                     old_reading = match.group(0)
 
-            if old_reading:
-                # Use regex to find and replace the old reading
-                old_reading_pattern = re.escape(old_reading.strip())
-                if re.search(old_reading_pattern, content):
-                    content = re.sub(old_reading_pattern, new_reading.strip(), content)
-                    with open(dest_file_path, 'w') as f:
-                        f.write(content)
-                    logger.info(f"Updated Bible Reading in: {dest_file_path} to {new_reading}")
-                else:
-                    logger.warning(f"Old reading not found in {dest_file_path}")
+            # Find the current Bible Reading in the agenda file using a regex
+            # This pattern looks for "### " followed by any characters until a newline
+            current_bible_reading_match = re.search(r"###\s+([A-Za-z0-9\s:]+)", content)
+
+            if current_bible_reading_match:
+                current_bible_reading_in_file = current_bible_reading_match.group(0)
+                
+                # Replace the found current Bible Reading with the new reading
+                content = content.replace(current_bible_reading_in_file, new_reading)
+                with open(dest_file_path, 'w') as f:
+                    f.write(content)
+                logger.info(f"Updated Bible Reading in: {dest_file_path} to {new_reading}")
             else:
-                logger.warning(f"Old reading not found in {dest_file_path}")
+                logger.warning(f"Current Bible Reading section not found in {dest_file_path}")
 
 
     # --- Replace KJV text for doc1 ---
