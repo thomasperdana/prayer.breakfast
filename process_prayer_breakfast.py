@@ -529,41 +529,21 @@ def convert_file_to_html(filepath):
 
 def print_file(filepath, copies):
     """'Prints' a file to the default printer with the specified number of copies."""
-    logging.info(f"Step 2j & 2m: Printing file {filepath} with {copies} copies.")
+    logging.info(f"Printing file {filepath} with {copies} copies.")
     
     if not os.path.exists(filepath):
         logging.error(f"File not found for printing: {filepath}")
         return
 
-    # Check if Google Chrome is available
-    chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    if not os.path.exists(chrome_path):
-        logging.error("Google Chrome not found. Please install it to print HTML files.")
-        return
-
     try:
-        # Convert HTML to PDF using Chrome headless
-        pdf_filepath = filepath.replace(".html", ".pdf")
-        convert_command = f"\"{chrome_path}\" --headless --disable-gpu --print-to-pdf=\"{pdf_filepath}\" \"{filepath}\""
-        os.system(convert_command)
-
-        if not os.path.exists(pdf_filepath):
-            logging.error(f"Failed to convert HTML to PDF: {filepath}")
-            return
-
-        # Print the PDF file
-        print_command = f"lp -n {copies}"
+        print_command = f"lp -o copies={copies}"
         if copies == 6:
             print_command += " -o fit-to-page"
-        print_command += f" \"{pdf_filepath}\""
+        print_command += f" \"{filepath}\""
         
         logging.info(f"Executing print command: {print_command}")
         os.system(print_command)
-        logging.info(f"File {filepath} converted to PDF and sent to default printer with {copies} copies.")
-
-        # Clean up the generated PDF file
-        os.remove(pdf_filepath)
-        logging.info(f"Removed temporary PDF file: {pdf_filepath}")
+        logging.info(f"File {filepath} sent to default printer with {copies} copies.")
 
     except Exception as e:
         logging.error(f"Error printing file {filepath}: {e}")
@@ -671,28 +651,9 @@ def main():
     # Step 2h
     pastor_prayer(agenda_file)
 
-    # Convert all headings to '#####'
-    # convert_small(agenda_file)
-
-    # Step 2i
-    # html_file = convert_file_to_html(agenda_file)
-
-    # Step 2j
-    # if html_file:
-        # print_file(html_file, copies=1)
-
-    # Step 2k
-
-
-    # Step 2l
-    # html_file_2 = convert_file_to_html(agenda_file)
-
-    # Step 2m
-    # if html_file_2:
-        # print_file(html_file_2, copies=1)
-
-    # Step 2n
-    # send_email(agenda_file)
+    # Print the markdown file 6 times as a workaround for printer issues
+    for _ in range(6):
+        print_file(agenda_file, copies=1)
 
     logging.info("Script finished.")
 
