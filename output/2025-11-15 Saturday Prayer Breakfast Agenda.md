@@ -1,5 +1,5 @@
-# Saturday Prayer Breakfast Agenda - 2025-11-15
-## 2025-11-08 Saturday Prayer Breakfast Agenda
+# North Seminole County Gideons
+## 2025-11-15 Saturday Prayer Breakfast Agenda
 
 ## Order Breakfast
 ## Offering time
@@ -480,4 +480,4 @@ Orlando, FL 32828
 | 82 | Rev. Michael Griffin | Zion Hope Missionary Baptist Church |
 
 ## Random Scripture for Reflection
-Colossians 4:6
+John 3:16, 17

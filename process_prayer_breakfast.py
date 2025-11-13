@@ -58,13 +58,18 @@ def rename_title(filepath):
     # Expected format: "YYYY-MM-DD Saturday Prayer Breakfast Agenda.md"
     date_part = filename.split(" ")[0] # "YYYY-MM-DD"
     
-    new_title_line = f"# Saturday Prayer Breakfast Agenda - {date_part}"
+    new_title_line = f"## {date_part} Saturday Prayer Breakfast Agenda"
     
     with open(filepath, 'r') as f:
         lines = f.readlines()
 
-    # Assuming the old title is the first line
-    lines[0] = new_title_line + "\n"
+    # Assuming the agenda title is the second line
+    if len(lines) > 1:
+        lines[1] = new_title_line + "\n"
+    else:
+        logging.warning(f"File {filepath} has less than two lines, cannot rename agenda title.")
+        # If there's only one line, append the new title
+        lines.append(new_title_line + "\n")
     
     with open(filepath, 'w') as f:
         f.writelines(lines)
@@ -254,7 +259,47 @@ def pastor_prayer(filepath):
     except Exception as e:
         logging.error(f"Error writing Pastor Directory to agenda file: {e}")
 
-import markdown
+# Try to import the 'markdown' library; if not available, provide a minimal fallback converter.
+try:
+    import markdown  # type: ignore
+except Exception:
+    import html as _html
+    import re as _re
+
+    class _MinimalMarkdown:
+        @staticmethod
+        def markdown(text):
+            """Very small markdown-to-HTML fallback: handle headings, bold, italics and paragraphs."""
+            if text is None:
+                return ""
+            # Escape HTML to avoid injecting raw HTML from the markdown source
+            out = _html.escape(text)
+
+            # Convert ATX headings: lines starting with 1-6 '#'
+            def _repl_heading(m):
+                level = len(m.group(1))
+                content = m.group(2).strip()
+                return f"<h{level}>{content}</h{level}>"
+            out = _re.sub(r'^(#{1,6})\s+(.*)$', _repl_heading, out, flags=_re.MULTILINE)
+
+            # Bold: **text**
+            out = _re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', out)
+
+            # Italic: *text*
+            out = _re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'<em>\1</em>', out)
+
+            # Simple unordered lists: lines starting with '- ' or '* '
+            def _repl_list(match):
+                items = [f"<li>{item.strip()}</li>" for item in match.group(0).splitlines()]
+                return "<ul>\n" + "\n".join(items) + "\n</ul>"
+            out = _re.sub(r'(^[-\*]\s+.+(\n[-\*]\s+.+)+)', _repl_list, out, flags=_re.MULTILINE)
+
+            # Convert remaining double newlines into paragraphs
+            paragraphs = [p.strip() for p in out.split('\n\n') if p.strip()]
+            paragraphs = [p.replace('\n', '<br/>') for p in paragraphs]
+            return '\n\n'.join(f"<p>{p}</p>" for p in paragraphs)
+
+    markdown = _MinimalMarkdown()
 
 def convert_file_to_html(filepath):
     """Converts a markdown file to HTML."""
