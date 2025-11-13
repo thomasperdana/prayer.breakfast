@@ -7,41 +7,66 @@
 
 ## Bible Reading Rotation 
 ### Hebrews 11:1-19
-1 For every high priest taken from among men is ordained for men in things
-pertaining to God, that he may offer both gifts and sacrifices for sins:
-2 Who can have compassion on the ignorant, and on them that are out of the way; for that he himself also is compassed with infirmity.
-3 And by reason hereof he ought, as for the people, so also for himself, to offer for sins.
-4 And no man taketh this honour unto himself, but he that is called of God, as
-was Aaron.
-5 So also Christ glorified not himself to be made an high priest; but he that said unto him, Thou art my Son, to day have I begotten thee.
-6 As he saith also in another
-place, Thou
-art a priest for ever after the order of Melchisedec.
-7 Who in the days of his flesh, when he had offered up prayers and supplications with strong crying and tears unto him that was able to save him from death, and was heard in that he feared;
-8 Though he were a Son, yet learned he obedience by the things which he suffered;
-9 And being made perfect, he became the author of eternal salvation unto all them that obey him;
-10 Called of God an high priest after the order of Melchisedec.
-11 Of whom we have many things to say, and hard to be uttered, seeing ye are dull of hearing.
-12 For when for the time ye ought to be teachers, ye have need that one teach you again which
-be the first principles of the oracles of God; and are become such as have need of milk, and not of strong meat.
-13 For every one that useth milk
-is unskilful in the word of righteousness: for he is a babe.
-14 But strong meat belongeth to them that are of full age,
-even
- those who by reason of use have their senses exercised to discern both good and evil.
+1 Now faith is the substance of things hoped for, the evidence of things not seen.
+2 For by it the elders obtained a good report.
+3 Through faith we understand that the worlds were framed by the word of God, so that things which are seen were not made of things which do appear.
+4 By faith Abel offered unto God a more excellent sacrifice than Cain, by which he obtained witness that he was righteous, God testifying of his gifts: and by it he being dead yet speaketh.
+5 By faith Enoch was translated that he should not see death; and was not found, because God had translated him: for before his translation he had this testimony, that he pleased God.
+6 But without faith
+it is impossible to please
+him:
+ for he that cometh to God must believe that he is, and
+that
+ he is a rewarder of them that diligently seek him.
+7 By faith Noah, being warned of God of things not seen as yet, moved with fear, prepared an ark to the saving of his house; by the which he condemned the world, and became heir of the righteousness which is by faith.
+8 By faith Abraham, when he was called to go out into a place which he should after receive for an inheritance, obeyed; and he went out, not knowing whither he went.
+9 By faith he sojourned in the land of promise, as
+in a strange country, dwelling in tabernacles with Isaac and Jacob, the heirs with him of the same promise:
+10 For he looked for a city which hath foundations, whose builder and maker
+is God.
+11 Through faith also Sara herself received strength to conceive seed, and was delivered of a child when she was past age, because she judged him faithful who had promised.
+12 Therefore sprang there even of one, and him as good as dead,
+so many as the stars of the sky in multitude, and as the sand which is by the sea shore innumerable.
+13 These all died in faith, not having received the promises, but having seen them afar off, and were persuaded of
+them, and embraced
+them, and confessed that they were strangers and pilgrims on the earth.
+14 For they that say such things declare plainly that they seek a country.
+15 And truly, if they had been mindful of that
+country from whence they came out, they might have had opportunity to have returned.
+16 But now they desire a better
+country, that is, an heavenly: wherefore God is not ashamed to be called their God: for he hath prepared for them a city.
+17 By faith Abraham, when he was tried, offered up Isaac: and he that had received the promises offered up his only begotten
+son,
+18 Of whom it was said, That in Isaac shall thy seed be called:
+19 Accounting that God
+was able to raise
+him up, even from the dead; from whence also he received him in a figure.
 
 ## Prayer Card Together
-### Page 39 III—WORKING 5.  John 9:4
+### Page 41 IV-WITNESSING 7.  Acts 1:8
 4 But he answered and said,
 It is written, Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.
   
 ## International Reading by TaeWoo Lee
 ### USA Zone 10—Jerry Clunan, Trustee (Rhea). USA Zone 11—Charley Lee Logwood, Trustee (Brenda). Gideon and Auxiliary state and camp officers and members of USA Zone 10—Delmardic, Pennsylvania, West Virginia. Also, USA Zone 11—North Carolina, South Carolina, Virginia. For those in danger of death through suicide, illness, or other reasons to be reached with the Gospel in time. Gideons and Auxiliary from Italy, Luxembourg, Malta, and the Netherlands. Mauritania*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Separated Walk.
 ### 2 CORINTHIANS 6:14-18
+14 Be ye not unequally yoked together with unbelievers: for what fellowship hath righteousness with unrighteousness? and what communion hath light with darkness?
+15 And what concord hath Christ with Belial? or what part hath he that believeth with an infidel?
+16 And what agreement hath the temple of God with idols? for ye are the temple of the living God; as God hath said, I will dwell in them, and walk in
+them; and I will be their God, and they shall be my people.
+17 Wherefore come out from among them, and be ye separate, saith the Lord, and touch not the unclean
+thing; and I will receive you,
+18 And will be a Father unto you, and ye shall be my sons and daughters, saith the Lord Almighty.
 
 ## State Reading by Alvin Beverly
 ### ### Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR **  **Area Directors:** - **SE09** - Jack Walton (Diane) - **SE12** - Mike McGarrigle (Lisa) - **SE17** - Stephen Cornwell (Carol) - **SE18** - Joseph Tang - **SE19** - Javier Morejon (Christie)  **Camps:** Palm Beach Central, Palm Beach North  ---
 ### Psalm 19:7-8
+7 The law of the LORD
+is perfect, converting the soul: the testimony of the LORD
+is sure, making wise the simple.
+8 The statutes of the LORD
+are right, rejoicing the heart: the commandment of the LORD
+is pure, enlightening the eyes.
 
 ## Pray for the Widows by Donald Tise
 ### Day 8 - North Region – NO7 (cont'd)
