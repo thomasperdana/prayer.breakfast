@@ -9,7 +9,7 @@
 ### Hebrews 11:1-19
 
 ## Prayer Card Together
-### Page 37 II—STUDYING: 3. Matthew 4:4
+### Page 38 II—STUDYING 4.  II Timothy 3:16, 17
   
 ## International Reading by TaeWoo Lee
 ### Finland—Lasse Schultz, Trustee (Hannele).
@@ -36,12 +36,6 @@ West Volusia County - Jean Kerr, Carolyn McPhail, Lea Widener,
 ## Prayer Rotation
 ## Closing Prayer by TaeWoo Lee
 ## Food and Fellowship
-### Prayer Card
----
-**A special prayer for our community:**
-Lord, we pray for peace, understanding, and compassion in our community. Guide us to serve one another with love and kindness. Amen.
----
-
 ## International Reading
 R.O.C. (Taiwan)—Jim Liou, Trustee (Lily). USA Zone 8—C. Dan Scott, Trustee (Faith). Gideon and Auxiliary state and camp officers and members of the Republic of China (Taiwan) and USA Zone 8—Kentucky, Mississippi, Tennessee. For a spiritual revival in all Gideon countries, and for the Christian communities in all Gideon countries to grow in numbers and strength. Gideons and Auxiliary from Andorra, Austria, Belgium, British Isles, Cyprus, and Denmark. Libya*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Faith. HEBREWS 11:6
 
@@ -477,4 +471,4 @@ Orlando, FL 32828
 | 82 | Rev. Michael Griffin | Zion Hope Missionary Baptist Church |
 
 ## Random Scripture for Reflection
-James 4:13, 14
+John 16:13, 14

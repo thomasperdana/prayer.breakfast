@@ -128,23 +128,81 @@ def bible_reading(filepath):
         logging.error(f"Error updating Bible Reading Rotation in agenda file: {e}")
 
 def prayer_card(filepath):
-    """Adds a prayer card section."""
-    logging.info("Step 2d: Adding prayer card.")
-    
-    prayer_card_content = """
-### Prayer Card
----
-**A special prayer for our community:**
-Lord, we pray for peace, understanding, and compassion in our community. Guide us to serve one another with love and kindness. Amen.
----
-"""
-    
+    """Updates the prayer card section by selecting the next item from prayer.md."""
+    logging.info("Step 2d: Updating prayer card.")
+
+    prayer_md_path = os.path.join(INPUT_DIR, "prayer.md")
+    if not os.path.exists(prayer_md_path):
+        logging.error(f"prayer.md not found: {prayer_md_path}")
+        return
+
     try:
-        with open(filepath, 'a') as f:
-            f.write(prayer_card_content)
-        logging.info("Added generic prayer card content.")
+        with open(prayer_md_path, 'r') as f:
+            prayer_md_content = f.read()
+        
+        # Split by "## Page" and create a list of entries
+        prayer_card_entries = re.split(r'\n## ', prayer_md_content)
+        prayer_card_entries = prayer_card_entries[1:]
+
+        if not prayer_card_entries:
+            logging.warning("No prayer card entries found in prayer.md.")
+            return
+
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Find the current prayer card in the agenda
+        current_prayer_card_match = re.search(r"## Prayer Card Together\n### Page (\d+)", agenda_content)
+        
+        if not current_prayer_card_match:
+            logging.warning("Could not find current prayer card in agenda. Using the first entry.")
+            next_prayer_card_index = 0
+        else:
+            current_page_number = current_prayer_card_match.group(1)
+            
+            current_index = -1
+            for i, entry in enumerate(prayer_card_entries):
+                if entry.strip().startswith(f"Page {current_page_number}"):
+                    current_index = i
+                    break
+            
+            if current_index == -1:
+                logging.warning(f"Could not find page {current_page_number} in prayer.md. Using the first entry.")
+                next_prayer_card_index = 0
+            else:
+                next_prayer_card_index = (current_index + 1) % len(prayer_card_entries)
+
+        # Get the next prayer card
+        next_entry_raw = prayer_card_entries[next_prayer_card_index]
+        
+        # Extract the page number
+        next_page_match = re.match(r"Page (\d+)", next_entry_raw)
+        next_page_number = next_page_match.group(1) if next_page_match else ""
+
+        # Extract the title (e.g., "II—STUDYING:")
+        title_match = re.search(r"### (.*?)\n", next_entry_raw)
+        title = title_match.group(1).strip() if title_match else ""
+
+        # Extract the reference line (e.g., "4. II Timothy 3:16, 17")
+        reference_match = re.search(r"(\d+\.\s+.*?)(?=, \")", next_entry_raw)
+        reference = reference_match.group(1).strip() if reference_match else ""
+
+        final_prayer_card_line = f"### Page {next_page_number} {title} {reference}"
+
+        # Replace the old prayer card with the new one
+        new_agenda_content = re.sub(
+            r"(## Prayer Card Together\n)(### .*?\n)",
+            rf"\1{final_prayer_card_line}\n",
+            agenda_content,
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        
+        logging.info(f"Updated prayer card to: {final_prayer_card_line}")
+
     except Exception as e:
-        logging.error(f"Error writing prayer card to agenda file: {e}")
+        logging.error(f"Error updating prayer card: {e}")
 
 def international_reading(filepath):
     """Adds an international reading from hq1.md."""
