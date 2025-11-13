@@ -317,8 +317,8 @@ def state_reading(filepath):
 
         # Replace the content under "## State Reading by Alvin Beverly"
         new_agenda_content = re.sub(
-            r"(## State Reading by Alvin Beverly\n)(.*?)(\n^## )",
-            rf"\1{state_content}\n\3",
+            r"(^(#+)\s*State Reading by Alvin Beverly\n)(.*?)(\n^(#+)\s*Pray for the Widows by Donald Tise|\Z)",
+            rf"\1{state_content}\4",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )

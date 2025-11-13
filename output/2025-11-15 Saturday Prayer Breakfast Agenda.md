@@ -6,10 +6,15 @@
 ##### USA Zone 10—Jerry Clunan, Trustee (Rhea). USA Zone 11—Charley Lee Logwood, Trustee (Brenda). Gideon and Auxiliary state and camp officers and members of USA Zone 10—Delmardic, Pennsylvania, West Virginia. Also, USA Zone 11—North Carolina, South Carolina, Virginia. For those in danger of death through suicide, illness, or other reasons to be reached with the Gospel in time. Gideons and Auxiliary from Italy, Luxembourg, Malta, and the Netherlands. Mauritania*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Separated Walk.
 ##### 2 CORINTHIANS 6:14-18
 ##### State Reading by Alvin Beverly
-##### Randy Bartlein (Mary) - STATE CHURCH MINISTRY COORDINATOR
-##### Your camp Church Ministry chairman: ____________________
-##### Camps: Baker County, Clay County South, JAX Northwest, JAX West
-##### Joshua 1:9
+##### Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR
+**Area Directors:**
+- **SE09** - Jack Walton (Diane)
+- **SE12** - Mike McGarrigle (Lisa)
+- **SE17** - Stephen Cornwell (Carol)
+- **SE18** - Joseph Tang
+- **SE19** - Javier Morejon (Christie)
+**Camps:** Palm Beach Central, Palm Beach North
+##### Psalm 19:7-8
 ##### Pray for the Widows by Donald Tise - 8. North Region – NO8
 ##### Citrus County - Michelle Dedrick, Rita Flesher, Celete Jumper, Vera Persechino, 
 ##### Golden Triangle - Eleanor Rosselle, 
