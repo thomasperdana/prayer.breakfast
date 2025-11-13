@@ -347,8 +347,7 @@ def widow_prayer(filepath):
         with open(widow_path, 'r') as f:
             widow_md_content = f.read()
         
-        # Find the prayer section for the specific day
-        day_pattern = re.compile(rf"(### {day_of_month}\..*?)\n(- .*?)(?=\n### |\Z)", re.DOTALL)
+        day_pattern = re.compile(rf"### ({day_of_month}\..*?)\n(- .*?)(?=\n### |\Z)", re.DOTALL)
         day_match = day_pattern.search(widow_md_content)
         
         if not day_match:
@@ -358,31 +357,29 @@ def widow_prayer(filepath):
         section_title = day_match.group(1).strip()
         section_content = day_match.group(2).strip()
 
-        # Reformat the content
         locations = {}
         for line in section_content.strip().split('\n'):
             line = line.strip('- ').strip()
             parts = line.split(',')
-            name = parts[0]
-            location = parts[1].strip()
-            
-            if location not in locations:
-                locations[location] = []
-            locations[location].append(name)
+            if len(parts) >= 2:
+                name = parts[0].strip()
+                location = parts[1].strip()
+                
+                if location not in locations:
+                    locations[location] = []
+                locations[location].append(name)
 
-        formatted_lines = [section_title]
+        formatted_parts = []
         for location, names in locations.items():
-            formatted_lines.append(f"{location} - {', '.join(names)}, ")
-            
-        formatted_content = '\n'.join(formatted_lines)
+            formatted_parts.append(f"{location} - {', '.join(names)},")
+        content_line = " - ".join(formatted_parts)
 
         with open(filepath, 'r') as f:
             agenda_content = f.read()
 
-        # Replace the old prayer section with the new one
         new_agenda_content = re.sub(
-            r"(## Pray for the Widows by Donald Tise\n)(.*?)(\n^## )",
-            rf"\1{formatted_content}\n\3",
+            r"(^#+\s*Pray for the Widows by Donald Tise)(.*?)(\n^#+\s*Pray for Local Pastor by Johnny Perry|\Z)",
+            rf"\1 - {section_title}\n### {content_line}\3",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )
@@ -675,7 +672,7 @@ def main():
     pastor_prayer(agenda_file)
 
     # Convert all headings to '#####'
-    convert_small(agenda_file)
+    # convert_small(agenda_file)
 
     # Step 2i
     # html_file = convert_file_to_html(agenda_file)
