@@ -11,3 +11,6 @@ temp_flask_test_output.log
 
 # OS generated files
 .DS_Store
+
+# Temporary test files
+app/temp_flask_test.py
