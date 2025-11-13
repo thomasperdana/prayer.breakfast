@@ -58,23 +58,26 @@ def rename_title(filepath):
     # Expected format: "YYYY-MM-DD Saturday Prayer Breakfast Agenda.md"
     date_part = filename.split(" ")[0] # "YYYY-MM-DD"
     
-    new_title_line = f"## {date_part} Saturday Prayer Breakfast Agenda"
-    
     with open(filepath, 'r') as f:
-        lines = f.readlines()
+        content = f.read()
 
-    # Assuming the agenda title is the second line
-    if len(lines) > 1:
-        lines[1] = new_title_line + "\n"
-    else:
-        logging.warning(f"File {filepath} has less than two lines, cannot rename agenda title.")
-        # If there's only one line, append the new title
-        lines.append(new_title_line + "\n")
+    # Extract organization name from the first line, assuming it starts with '#####'
+    org_name_match = re.match(r"^(#+)\s*(.*?)(?:\s*-\s*\d{4}-\d{2}-\d{2}.*)?$", content, re.MULTILINE)
+    organization_name = "North Seminole County Gideons" # Default if not found
+    if org_name_match:
+        organization_name = org_name_match.group(2).strip()
+        # Remove any old date part from the organization name if present
+        organization_name = re.sub(r'\s*-\s*\d{4}-\d{2}-\d{2}.*$', '', organization_name).strip()
+
+    new_combined_title = f"##### {organization_name} - {date_part} Saturday Prayer Breakfast Agenda"
     
+    # Replace the first line with the new combined title
+    new_content = re.sub(r"^(#+.*?\n)", new_combined_title + "\n", content, count=1, flags=re.MULTILINE)
+        
     with open(filepath, 'w') as f:
-        f.writelines(lines)
+        f.write(new_content)
     
-    logging.info(f"Title renamed to: {new_title_line}")
+    logging.info(f"Title renamed to: {new_combined_title}")
 
 def bible_reading(filepath):
     """Replaces the Bible Reading Rotation section with the reading for the next Saturday."""
@@ -115,10 +118,10 @@ def bible_reading(filepath):
 
         # Replace the content under "## Bible Reading Rotation"
         new_agenda_content = re.sub(
-            r"(## Bible Reading Rotation\s*\n### ).*?(\n)",
-            rf"\1{bible_verse}\2",
+            r"^(#+)\s*Bible Reading Rotation - .*?(\n)",
+            rf"\1 Bible Reading Rotation - {bible_verse}\n",
             agenda_content,
-            flags=re.DOTALL
+            flags=re.DOTALL | re.MULTILINE
         )
 
         with open(filepath, 'w') as f:
@@ -152,13 +155,13 @@ def prayer_card(filepath):
             agenda_content = f.read()
 
         # Find the current prayer card in the agenda
-        current_prayer_card_match = re.search(r"## Prayer Card Together\n### Page (\d+)", agenda_content)
+        current_prayer_card_match = re.search(r"^(#+)\s*Prayer Card Together - Page (\d+)", agenda_content, flags=re.MULTILINE)
         
         if not current_prayer_card_match:
             logging.warning("Could not find current prayer card in agenda. Using the first entry.")
             next_prayer_card_index = 0
         else:
-            current_page_number = current_prayer_card_match.group(1)
+            current_page_number = current_prayer_card_match.group(2)
             
             current_index = -1
             for i, entry in enumerate(prayer_card_entries):
@@ -187,13 +190,14 @@ def prayer_card(filepath):
         reference_match = re.search(r"(\d+\.\s+.*?)(?=, \")", next_entry_raw)
         reference = reference_match.group(1).strip() if reference_match else ""
 
-        final_prayer_card_line = f"### Page {next_page_number} {title} {reference}"
+        final_prayer_card_line = f"Page {next_page_number} {title} {reference}"
 
         # Replace the old prayer card with the new one
         new_agenda_content = re.sub(
-            r"(## Prayer Card Together\n)(### .*?\n)",
-            rf"\1{final_prayer_card_line}\n",
+            r"^(#+)\s*Prayer Card Together - Page .*?\n",
+            rf"\1 Prayer Card Together - {final_prayer_card_line}\n",
             agenda_content,
+            flags=re.MULTILINE
         )
 
         with open(filepath, 'w') as f:
@@ -249,8 +253,8 @@ def international_reading(filepath):
 
         # Replace the content under "## International Reading by TaeWoo Lee"
         new_agenda_content = re.sub(
-            r"(## International Reading by TaeWoo Lee\n)(.*?)(\n^## )",
-            rf"\1{formatted_content}\n\3",
+            r"(^(#+)\s*International Reading by TaeWoo Lee\n)(.*?)(\n^(#+)\s*State Reading by|\Z)",
+            rf"\1{formatted_content}\4",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )
@@ -420,13 +424,13 @@ def pastor_prayer(filepath):
             agenda_content = f.read()
 
         # Find the current pastor in the agenda
-        current_pastor_match = re.search(r"## Pray for Local Pastor by Johnny Perry\n### (.*?)\n### (.*?)\n", agenda_content)
+        current_pastor_match = re.search(r"^(#+)\s*Pray for Local Pastor by Johnny Perry - (.*?) - (.*?)\n", agenda_content, flags=re.MULTILINE)
         
         if not current_pastor_match:
             logging.warning("Could not find current pastor in agenda. Using the first entry.")
             next_pastor_index = 0
         else:
-            current_church = current_pastor_match.group(1).strip()
+            current_church = current_pastor_match.group(2).strip()
             
             current_index = -1
             for i, entry in enumerate(pastor_entries):
@@ -442,12 +446,12 @@ def pastor_prayer(filepath):
 
         # Get the next pastor
         next_pastor = pastor_entries[next_pastor_index]
-        formatted_content = f"### {next_pastor['church']}\n### {next_pastor['name']}"
+        formatted_content = f"Pray for Local Pastor by Johnny Perry - {next_pastor['church']} - {next_pastor['name']}"
 
         # Replace the old pastor prayer section with the new one
         new_agenda_content = re.sub(
-            r"(## Pray for Local Pastor by Johnny Perry\n)(.*?)(\n^## )",
-            rf"\1{formatted_content}\n\3",
+            r"^(#+)\s*Pray for Local Pastor by Johnny Perry - .*?\n",
+            rf"\1 {formatted_content}\n",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )
@@ -526,15 +530,46 @@ def convert_file_to_html(filepath):
         logging.error(f"Error converting markdown to HTML: {e}")
         return None
 
-def print_file(filepath):
-    """'Prints' a file (saves it or displays content)."""
-    logging.info("Step 2j & 2m: 'Printing' file.")
+def print_file(filepath, copies):
+    """'Prints' a file to the default printer with the specified number of copies."""
+    logging.info(f"Step 2j & 2m: Printing file {filepath} with {copies} copies.")
     
     if not os.path.exists(filepath):
         logging.error(f"File not found for printing: {filepath}")
         return
 
-    logging.info(f"File ready for review/printing: {filepath}")
+    # Check if Google Chrome is available
+    chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if not os.path.exists(chrome_path):
+        logging.error("Google Chrome not found. Please install it to print HTML files.")
+        return
+
+    try:
+        # Convert HTML to PDF using Chrome headless
+        pdf_filepath = filepath.replace(".html", ".pdf")
+        convert_command = f"\"{chrome_path}\" --headless --disable-gpu --print-to-pdf=\"{pdf_filepath}\" \"{filepath}\""
+        os.system(convert_command)
+
+        if not os.path.exists(pdf_filepath):
+            logging.error(f"Failed to convert HTML to PDF: {filepath}")
+            return
+
+        # Print the PDF file
+        print_command = f"lp -n {copies}"
+        if copies == 6:
+            print_command += " -o fit-to-page"
+        print_command += f" \"{pdf_filepath}\""
+        
+        logging.info(f"Executing print command: {print_command}")
+        os.system(print_command)
+        logging.info(f"File {filepath} converted to PDF and sent to default printer with {copies} copies.")
+
+        # Clean up the generated PDF file
+        os.remove(pdf_filepath)
+        logging.info(f"Removed temporary PDF file: {pdf_filepath}")
+
+    except Exception as e:
+        logging.error(f"Error printing file {filepath}: {e}")
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -545,6 +580,25 @@ from email import encoders
 def send_email(filepath):
     """Sends the file as an email."""
     logging.info("Step 2n: Sending email.")
+
+def convert_small(filepath):
+    """Converts all headings in the file to '##### '."""
+    logging.info("Converting all headings to '#####'.")
+    try:
+        with open(filepath, 'r') as f:
+            content = f.read()
+        
+        # Replace all headings with '#####'
+        content = re.sub(r"^(#+)\s", "##### ", content, flags=re.MULTILINE)
+        
+        with open(filepath, 'w') as f:
+            f.write(content)
+        
+        logging.info("Headings converted successfully.")
+    except Exception as e:
+        logging.error(f"Error in convert_small: {e}")
+
+
 
     # Email configuration - REPLACE WITH ACTUAL CREDENTIALS AND DETAILS
     sender_email = "your_email@example.com"
@@ -620,22 +674,28 @@ def main():
     # Step 2h
     pastor_prayer(agenda_file)
 
+    # Convert all headings to '#####'
+    convert_small(agenda_file)
+
     # Step 2i
-    html_file = convert_file_to_html(agenda_file)
+    # html_file = convert_file_to_html(agenda_file)
 
     # Step 2j
-    if html_file:
-        print_file(html_file)
+    # if html_file:
+        # print_file(html_file, copies=1)
+
+    # Step 2k
+
 
     # Step 2l
-    html_file_2 = convert_file_to_html(agenda_file)
+    # html_file_2 = convert_file_to_html(agenda_file)
 
     # Step 2m
-    if html_file_2:
-        print_file(html_file_2)
+    # if html_file_2:
+        # print_file(html_file_2, copies=1)
 
     # Step 2n
-    send_email(agenda_file)
+    # send_email(agenda_file)
 
     logging.info("Script finished.")
 
