@@ -57,7 +57,7 @@ def setup_logging():
     return logger
 
 
-def init_file_1():
+def init_file():
     """Initialize application configuration."""
     import shutil
     import stat
@@ -71,6 +71,14 @@ def init_file_1():
         input_dir = Path("input")
         output_dir = Path("output")
         output_dir.mkdir(exist_ok=True)
+        
+        # Protect input directory as read-only
+        input_dir.chmod(0o555)
+        for item in input_dir.rglob("*"):
+            if item.is_file():
+                item.chmod(0o555)
+        logger.info("Protected input directory and files as read-only (555)")
+        logger.debug("Set permissions to r-xr-xr-x for input directory")
         
         last_week_file = input_dir / "2025-11-08 Saturday Prayer Breakfast Agenda.md"
         
@@ -130,7 +138,7 @@ def bible_reading():
     
     try:
         if NEXT_WEEK_DATE is None or NEXT_WEEK_AGENDA_FILE is None:
-            logger.error("Global variables not initialized. Run init_file_1 first.")
+            logger.error("Global variables not initialized. Run init_file first.")
             return {"status": "error", "procedure": "02", "error": "Missing global variables"}
         
         # Read the Bible reading schedule
@@ -184,20 +192,141 @@ def bible_reading():
         return {"status": "error", "procedure": "02", "error": str(e)}
 
 
-def procedure_03():
-    """Load environment variables."""
+def prayer_card():
+    """Update Prayer Card rotation for next week."""
+    import re
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 03: Loading environment variables")
-    logger.debug("Reading .env file if exists")
-    return {"status": "success", "procedure": "03"}
+    logger.info("Procedure 03: Updating Prayer Card rotation")
+    logger.debug("Reading Prayer Card schedule from prayer.md")
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variable NEXT_WEEK_AGENDA_FILE not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "03", "error": "Missing global variable"}
+        
+        # Read the prayer card schedule
+        prayer_file = Path("input/prayer.md")
+        prayer_content = prayer_file.read_text()
+        
+        # Read the current agenda to find the current prayer card entry
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Extract current prayer card page number
+        current_pattern = r"Prayer Card Together - Page (\d+)"
+        current_match = re.search(current_pattern, agenda_content)
+        
+        if not current_match:
+            logger.error("Could not find current Prayer Card entry in agenda")
+            return {"status": "error", "procedure": "03", "error": "Current prayer card not found"}
+        
+        current_page = int(current_match.group(1))
+        next_page = current_page + 1
+        
+        logger.debug(f"Current prayer card page: {current_page}, next page: {next_page}")
+        
+        # Find the next page entry in prayer.md
+        # Look for the bullet point which has the scripture reference
+        page_pattern = rf"## Page {next_page}\s*\n+### ([^\n]+)\s*\n+(\d+)\.\s+[^\n]+\n\s*\*\s+([^\n]+)"
+        page_match = re.search(page_pattern, prayer_content, re.MULTILINE | re.DOTALL)
+        
+        if not page_match:
+            logger.error(f"Could not find Page {next_page} in prayer.md")
+            return {"status": "error", "procedure": "03", "error": f"Page {next_page} not found"}
+        
+        section_name = page_match.group(1).strip()
+        item_number = page_match.group(2).strip()
+        scripture_ref = page_match.group(3).strip()
+        
+        # Ensure section_name ends with colon if it doesn't have one
+        if not section_name.endswith(':'):
+            section_name += ':'
+        
+        # Transform scripture reference: replace ", " with "-" for verse ranges
+        scripture_ref = re.sub(r',\s+(\d+)$', r'-\1', scripture_ref)
+        
+        # Build the new prayer card entry in the correct format
+        new_prayer_card = f"Prayer Card Together - Page {next_page} {section_name} {item_number}. {scripture_ref}"
+        
+        logger.info(f"Next prayer card: {new_prayer_card}")
+        
+        # Update the agenda file
+        old_pattern = r"Prayer Card Together - Page \d+.*"
+        updated_content = re.sub(old_pattern, new_prayer_card, agenda_content)
+        NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+        
+        logger.info(f"Updated Prayer Card from Page {current_page} to Page {next_page}")
+        logger.debug("Prayer card rotation updated successfully")
+        
+        return {"status": "success", "procedure": "03"}
+        
+    except Exception as e:
+        logger.error(f"Failed to update Prayer Card: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "03", "error": str(e)}
 
 
-def procedure_04():
-    """Connect to database."""
+def international_reading():
+    """Update International Reading for next week."""
+    import re
+    global NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 04: Establishing database connection")
-    logger.debug("Database connection parameters validated")
-    return {"status": "success", "procedure": "04"}
+    logger.info("Procedure 04: Updating International Reading")
+    logger.debug("Reading International schedule from hq1.md")
+    
+    try:
+        if NEXT_WEEK_DATE is None or NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variables not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "04", "error": "Missing global variables"}
+        
+        # Read the international reading schedule
+        hq1_file = Path("input/hq1.md")
+        hq1_content = hq1_file.read_text()
+        
+        # Get the day number from NEXT_WEEK_DATE
+        day_number = NEXT_WEEK_DATE.day
+        
+        logger.debug(f"Looking for DAY {day_number}")
+        
+        # Find the DAY section in hq1.md
+        day_pattern = rf"## \*\*DAY {day_number}\*\*\s*\n(.*?)(?=\n## \*\*DAY|\Z)"
+        day_match = re.search(day_pattern, hq1_content, re.DOTALL)
+        
+        if not day_match:
+            logger.error(f"Could not find DAY {day_number} in hq1.md")
+            return {"status": "error", "procedure": "04", "error": f"DAY {day_number} not found"}
+        
+        day_content = day_match.group(1).strip()
+        
+        logger.info(f"Found International Reading for DAY {day_number}")
+        logger.debug(f"Content length: {len(day_content)} characters")
+        
+        # Update the agenda file
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Find and replace the International Reading section
+        # Pattern: from "International Reading by..." to the next section or scripture reference
+        old_pattern = r"International Reading by [^\n]+\n.*?(?=\n\n[A-Z]|\nEphesians|\nRomans|\nMatthew|\nProverbs|\nHebrews|\n2 Timothy|\n1 John|\nRevelation|\n2 Corinthians|\nActs)"
+        
+        new_international_reading = f"International Reading by TaeWoo Lee\n{day_content}"
+        
+        # Check if pattern exists
+        if re.search(old_pattern, agenda_content, re.DOTALL):
+            updated_content = re.sub(old_pattern, new_international_reading, agenda_content, flags=re.DOTALL)
+            NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+            
+            logger.info(f"Updated International Reading to DAY {day_number}")
+            logger.debug("International reading updated successfully")
+        else:
+            logger.error("Could not find International Reading section to replace")
+            return {"status": "error", "procedure": "04", "error": "International Reading section not found"}
+        
+        return {"status": "success", "procedure": "04"}
+        
+    except Exception as e:
+        logger.error(f"Failed to update International Reading: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "04", "error": str(e)}
 
 
 def procedure_05():
@@ -336,7 +465,7 @@ def main():
     logger.info("=" * 60)
     
     procedures = [
-        init_file_1, bible_reading, procedure_03, procedure_04, procedure_05,
+        init_file, bible_reading, prayer_card, international_reading, procedure_05,
         procedure_06, procedure_07, procedure_08, procedure_09, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20

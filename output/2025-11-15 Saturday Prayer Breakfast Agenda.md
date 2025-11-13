@@ -4,11 +4,10 @@ Order Breakfast, Offering time, Opening Prayer by TaeWoo Lee
 
 Bible Reading Rotation - Hebrews 11:1-19
 
-Prayer Card Together - Page 37 II—STUDYING: 3. Matthew 4:4
+Prayer Card Together - Page 38 II—STUDYING: 4. II Timothy 3:16-17
 
 International Reading by TaeWoo Lee
-Finland—Lasse Schultz, Trustee (Hannele). USA Zone 3—John Ortega, Trustee (Pam). Gideon and Auxiliary state and camp officers and members of Finland and USA Zone 3—Rocky Mountain, Southwest, Texas. State and national conventions, including all attendees and the officers, speakers, and international representatives involved. Gideons and Auxiliary from Trinidad/Tobago, Turks & Caicos Islands, Virgin Islands, Albania, Armenia, and Bosnia & Herzegovina. Afghanistan*. Our core value of a membership of business and professional men, except clergymen, who accept the biblical standard of marriage being between one biological man and one biological woman.
-Ephesians 5:31
+USA Zone 10—Jerry Clunan, Trustee (Rhea). USA Zone 11—Charley Lee Logwood, Trustee (Brenda). Gideon and Auxiliary state and camp officers and members of USA Zone 10—Delmardic, Pennsylvania, West Virginia. Also, USA Zone 11—North Carolina, South Carolina, Virginia. For those in danger of death through suicide, illness, or other reasons to be reached with the Gospel in time. Gideons and Auxiliary from Italy, Luxembourg, Malta, and the Netherlands. Mauritania*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Separated Walk. 2 CORINTHIANS 6:14-18
 
 State Reading by Alvin Beverly
 Randy Bartlein (Mary) - STATE CHURCH MINISTRY COORDINATOR - Your camp Church Ministry chairman: ____________________ - Camps: Baker County, Clay County South, JAX Northwest, JAX West

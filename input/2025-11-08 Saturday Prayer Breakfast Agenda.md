@@ -7,8 +7,7 @@ Bible Reading Rotation - Hebrews 5:1-14
 Prayer Card Together - Page 37 II—STUDYING: 3. Matthew 4:4
 
 International Reading by TaeWoo Lee
-Finland—Lasse Schultz, Trustee (Hannele). USA Zone 3—John Ortega, Trustee (Pam). Gideon and Auxiliary state and camp officers and members of Finland and USA Zone 3—Rocky Mountain, Southwest, Texas. State and national conventions, including all attendees and the officers, speakers, and international representatives involved. Gideons and Auxiliary from Trinidad/Tobago, Turks & Caicos Islands, Virgin Islands, Albania, Armenia, and Bosnia & Herzegovina. Afghanistan*. Our core value of a membership of business and professional men, except clergymen, who accept the biblical standard of marriage being between one biological man and one biological woman.
-Ephesians 5:31
+Finland—Lasse Schultz, Trustee (Hannele). USA Zone 3—John Ortega, Trustee (Pam). Gideon and Auxiliary state and camp officers and members of Finland and USA Zone 3—Rocky Mountain, Southwest, Texas. State and national conventions, including all attendees and the officers, speakers, and international representatives involved. Gideons and Auxiliary from Trinidad/Tobago, Turks & Caicos Islands, Virgin Islands, Albania, Armenia, and Bosnia & Herzegovina. Afghanistan*. Our core value of a membership of business and professional men, except clergymen, who accept the biblical standard of marriage being between one biological man and one biological woman. Ephesians 5:31
 
 State Reading by Alvin Beverly
 Randy Bartlein (Mary) - STATE CHURCH MINISTRY COORDINATOR - Your camp Church Ministry chairman: ____________________ - Camps: Baker County, Clay County South, JAX Northwest, JAX West
