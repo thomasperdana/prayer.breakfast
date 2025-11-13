@@ -280,11 +280,27 @@ def state_reading(filepath):
         with open(fl_path, 'r') as f:
             content = f.read()
             
-            full_day_pattern = re.compile(rf"(## Day {day_of_month} - .*?)(?=## Day |\Z)", re.DOTALL)
-            full_day_match = full_day_pattern.search(content)
+            day_pattern = re.compile(rf"## Day {day_of_month} - .*?\n\n(.*?)(?=---|\Z)", re.DOTALL)
+            day_match = day_pattern.search(content)
             
-            if full_day_match:
-                state_content = full_day_match.group(1).strip()
+            if day_match:
+                main_content = day_match.group(1).strip()
+                
+                # Extract bible reference
+                ref_match = re.search(r"\*(.*?)\*", main_content)
+                if ref_match:
+                    bible_ref = ref_match.group(1)
+                    # Remove the bible reference from the main content
+                    main_content = main_content.replace(f"*{bible_ref}*", "").strip()
+                    
+                    # Remove extra line breaks
+                    lines = main_content.split('\n')
+                    non_empty_lines = [line for line in lines if line.strip() != '']
+                    main_content = '\n'.join(non_empty_lines)
+                    
+                    state_content = f"{main_content}\n### {bible_ref}"
+                else:
+                    state_content = main_content
             else:
                 state_content = "State reading not found for today."
 

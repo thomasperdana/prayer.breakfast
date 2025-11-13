@@ -16,21 +16,15 @@
 ### 2 CORINTHIANS 6:14-18
 
 ## State Reading by Alvin Beverly
-## Day 15 - Gideon Leadership—SE Region
-
 ### Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR
-*Psalm 19:7-8*
-
 **Area Directors:**
 - **SE09** - Jack Walton (Diane)
 - **SE12** - Mike McGarrigle (Lisa)
 - **SE17** - Stephen Cornwell (Carol)
 - **SE18** - Joseph Tang
 - **SE19** - Javier Morejon (Christie)
-
 **Camps:** Palm Beach Central, Palm Beach North
-
----
+### Psalm 19:7-8
 
 ## Pray for the Widows by Donald Tise
 # Florida Association - Widows Daily Prayer Calendar 2025-2026
@@ -449,4 +443,4 @@ Orlando, FL 32828
 ## Closing Prayer by TaeWoo Lee
 ## Food and Fellowship
 ## Random Scripture for Reflection
-James 4:4
+John 9:4
