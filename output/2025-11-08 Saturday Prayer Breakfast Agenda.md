@@ -24,9 +24,10 @@ Camps: Baker County, Clay County South, JAX Northwest, JAX West
 ### Joshua 1:9
 
 ## Pray for the Widows by Donald Tise
-### North Region – NO7 (cont'd)
-NE Volusia County - Kathryn Teter,
-West Volusia County - Jean Kerr, Carolyn McPhail, Lea Widener,
+### 8. North Region – NO8
+Citrus County - Michelle Dedrick, Rita Flesher, Celete Jumper, Vera Persechino, 
+Golden Triangle - Eleanor Rosselle, 
+Leesburg - Judy Emery, Myra Guess, Dawn Haas, Wanda Helmick, Kathleen Orr, Rebecca Weaver, 
 
 ## Pray for Local Pastor by Johnny Perry
 ### New Mt. Calvary Baptist Church

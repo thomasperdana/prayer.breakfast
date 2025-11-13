@@ -326,38 +326,70 @@ def state_reading(filepath):
         logging.error(f"Error updating State Reading in agenda file: {e}")
 
 def widow_prayer(filepath):
-    """Updates the widow prayer section from widow.md."""
+    """Updates the widow prayer section based on the day of the month of the next Saturday."""
     logging.info("Step 2g: Updating widow prayer.")
     
+    today = datetime.now()
+    days_until_saturday = (5 - today.weekday() + 7) % 7
+    next_saturday_date = today + timedelta(days=days_until_saturday)
+    day_of_month = next_saturday_date.day
+
     widow_path = os.path.join(INPUT_DIR, "widow.md")
     if not os.path.exists(widow_path):
         logging.error(f"widow.md not found: {widow_path}")
         return
 
-    widow_content = "Widow prayer content not found."
     try:
         with open(widow_path, 'r') as f:
-            widow_content = f.read().strip()
-    except Exception as e:
-        logging.error(f"Error reading widow.md: {e}")
+            widow_md_content = f.read()
         
-    try:
+        # Find the prayer section for the specific day
+        day_pattern = re.compile(rf"(### {day_of_month}\..*?)\n(- .*?)(?=\n### |\Z)", re.DOTALL)
+        day_match = day_pattern.search(widow_md_content)
+        
+        if not day_match:
+            logging.warning(f"No prayer section found for day {day_of_month} in widow.md.")
+            return
+
+        section_title = day_match.group(1).strip()
+        section_content = day_match.group(2).strip()
+
+        # Reformat the content
+        locations = {}
+        for line in section_content.strip().split('\n'):
+            line = line.strip('- ').strip()
+            parts = line.split(',')
+            name = parts[0]
+            location = parts[1].strip()
+            
+            if location not in locations:
+                locations[location] = []
+            locations[location].append(name)
+
+        formatted_lines = [section_title]
+        for location, names in locations.items():
+            formatted_lines.append(f"{location} - {', '.join(names)}, ")
+            
+        formatted_content = '\n'.join(formatted_lines)
+
         with open(filepath, 'r') as f:
             agenda_content = f.read()
 
-        # Replace the content under "## Pray for the Widows by Donald Tise"
+        # Replace the old prayer section with the new one
         new_agenda_content = re.sub(
             r"(## Pray for the Widows by Donald Tise\n)(.*?)(\n^## )",
-            rf"\1{widow_content}\n\3",
+            rf"\1{formatted_content}\n\3",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )
 
         with open(filepath, 'w') as f:
             f.write(new_agenda_content)
-        logging.info("Updated Widow Prayer content.")
+        
+        logging.info(f"Updated widow prayer to: {section_title}")
+
     except Exception as e:
-        logging.error(f"Error updating Widow Prayer in agenda file: {e}")
+        logging.error(f"Error updating widow prayer: {e}")
 
 def pastor_prayer(filepath):
     """Updates the pastor prayer section from pastor.md."""
