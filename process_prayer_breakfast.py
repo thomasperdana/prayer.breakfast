@@ -392,7 +392,7 @@ def widow_prayer(filepath):
         logging.error(f"Error updating widow prayer: {e}")
 
 def pastor_prayer(filepath):
-    """Updates the pastor prayer section from pastor.md."""
+    """Updates the pastor prayer section by selecting the next pastor from pastor.md."""
     logging.info("Step 2h: Updating pastor prayer.")
     
     pastor_path = os.path.join(INPUT_DIR, "pastor.md")
@@ -400,30 +400,65 @@ def pastor_prayer(filepath):
         logging.error(f"pastor.md not found: {pastor_path}")
         return
 
-    pastor_content = "Pastor prayer content not found."
     try:
         with open(pastor_path, 'r') as f:
-            pastor_content = f.read().strip()
-    except Exception as e:
-        logging.error(f"Error reading pastor.md: {e}")
+            pastor_md_content = f.read()
         
-    try:
+        # Parse the markdown table
+        pastor_entries = []
+        for line in pastor_md_content.splitlines():
+            if '|' in line and '---' not in line and 'Pastor Name' not in line:
+                parts = [p.strip() for p in line.split('|') if p.strip()]
+                if len(parts) == 3:
+                    pastor_entries.append({"name": parts[1], "church": parts[2]})
+
+        if not pastor_entries:
+            logging.warning("No pastor entries found in pastor.md.")
+            return
+
         with open(filepath, 'r') as f:
             agenda_content = f.read()
 
-        # Replace the content under "## Pray for Local Pastor by Johnny Perry"
+        # Find the current pastor in the agenda
+        current_pastor_match = re.search(r"## Pray for Local Pastor by Johnny Perry\n### (.*?)\n### (.*?)\n", agenda_content)
+        
+        if not current_pastor_match:
+            logging.warning("Could not find current pastor in agenda. Using the first entry.")
+            next_pastor_index = 0
+        else:
+            current_church = current_pastor_match.group(1).strip()
+            
+            current_index = -1
+            for i, entry in enumerate(pastor_entries):
+                if entry["church"] == current_church:
+                    current_index = i
+                    break
+            
+            if current_index == -1:
+                logging.warning(f"Could not find pastor for church '{current_church}' in pastor.md. Using the first entry.")
+                next_pastor_index = 0
+            else:
+                next_pastor_index = (current_index + 1) % len(pastor_entries)
+
+        # Get the next pastor
+        next_pastor = pastor_entries[next_pastor_index]
+        formatted_content = f"### {next_pastor['church']}\n### {next_pastor['name']}"
+
+        # Replace the old pastor prayer section with the new one
         new_agenda_content = re.sub(
             r"(## Pray for Local Pastor by Johnny Perry\n)(.*?)(\n^## )",
-            rf"\1{pastor_content}\n\3",
+            rf"\1{formatted_content}\n\3",
             agenda_content,
             flags=re.DOTALL | re.MULTILINE
         )
 
         with open(filepath, 'w') as f:
             f.write(new_agenda_content)
-        logging.info("Updated Pastor Prayer content.")
+        
+        logging.info(f"Updated pastor prayer to: {next_pastor['name']} at {next_pastor['church']}")
+
     except Exception as e:
-        logging.error(f"Error updating Pastor Prayer in agenda file: {e}")
+        logging.error(f"Error updating pastor prayer: {e}")
 
 # Try to import the 'markdown' library; if not available, provide a minimal fallback converter.
 try:
@@ -500,49 +535,6 @@ def print_file(filepath):
         return
 
     logging.info(f"File ready for review/printing: {filepath}")
-
-def get_scripture(filepath):
-    """Gets a scripture and adds it to the file."""
-    logging.info("Step 2k: Getting scripture.")
-    
-    prayer_md_path = os.path.join(INPUT_DIR, "prayer.md")
-    if not os.path.exists(prayer_md_path):
-        logging.error(f"prayer.md not found: {prayer_md_path}")
-        return
-
-    scriptures = []
-    try:
-        with open(prayer_md_path, 'r') as f:
-            content = f.read()
-            # Regex to find scripture references like "Romans 1:16" or "II Corinthians 5:17"
-            # This pattern looks for common book names, chapter:verse, and handles Roman numerals.
-            # It also captures the full line where the scripture is mentioned.
-            scripture_pattern = re.compile(r"(\*?\s*[IVXLCDM]*\s*[A-Za-z]+\s+\d+:\d+(?:-\d+)?(?:,\s*\d+)?(?:,\s*\d+:\d+(?:-\d+)?)?\s*\*?)")
-            
-            # Find all matches
-            for line in content.splitlines():
-                match = scripture_pattern.search(line)
-                if match:
-                    # Clean up the matched scripture string
-                    scripture_ref = match.group(1).replace('*', '').strip()
-                    if scripture_ref: # Ensure it's not an empty string
-                        scriptures.append(scripture_ref)
-
-    except Exception as e:
-        logging.error(f"Error reading or parsing prayer.md for scriptures: {e}")
-        
-    selected_scripture = "No scripture found."
-    if scriptures:
-        selected_scripture = random.choice(scriptures)
-        
-    # Append to the agenda file
-    try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## Random Scripture for Reflection\n")
-            f.write(f"{selected_scripture}\n")
-        logging.info(f"Added random scripture: {selected_scripture}")
-    except Exception as e:
-        logging.error(f"Error writing random scripture to agenda file: {e}")
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -634,9 +626,6 @@ def main():
     # Step 2j
     if html_file:
         print_file(html_file)
-
-    # Step 2k
-    get_scripture(agenda_file)
 
     # Step 2l
     html_file_2 = convert_file_to_html(agenda_file)
