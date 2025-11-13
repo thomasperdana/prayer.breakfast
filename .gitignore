@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+flask_output.log
+temp_flask_test_output.log
+
+# OS generated files
+.DS_Store
