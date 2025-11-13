@@ -4,6 +4,7 @@ import re
 import shutil
 import os
 from datetime import datetime, timedelta
+import requests
 
 # --- Configuration ---
 INPUT_DIR = "input"
@@ -558,22 +559,7 @@ def send_email(filepath):
     """Sends the file as an email."""
     logging.info("Step 2n: Sending email.")
 
-def convert_small(filepath):
-    """Converts all headings in the file to '##### '."""
-    logging.info("Converting all headings to '#####'.")
-    try:
-        with open(filepath, 'r') as f:
-            content = f.read()
-        
-        # Replace all headings with '#####'
-        content = re.sub(r"^(#+)\s", "##### ", content, flags=re.MULTILINE)
-        
-        with open(filepath, 'w') as f:
-            f.write(content)
-        
-        logging.info("Headings converted successfully.")
-    except Exception as e:
-        logging.error(f"Error in convert_small: {e}")
+
 
 
 
@@ -617,6 +603,93 @@ def convert_small(filepath):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
+def kjv_text(filepath):
+    """
+    Scans the agenda file for Bible references, fetches the KJV text,
+    and inserts it below the reference.
+    """
+    logging.info("Fetching KJV text for Bible references.")
+
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+
+        # Regex for Bible references: Book Chapter:Verse-Verse or Book Chapter:Verse
+        # Handles optional leading numbers (e.g., 1 John) and Roman numerals (e.g., II Timothy)
+        bible_ref_pattern = re.compile(
+            r'\b(?:(I|II|III|\d+)\s*)?([A-Za-z]+)\s+(\d+):(\d+(?:[,-]\d+)*)\b'
+        )
+        
+        new_content = []
+        for line in lines:
+            new_content.append(line.rstrip('\n')) # Add the original line
+            match = bible_ref_pattern.search(line)
+            if match:
+                # Reconstruct the reference string for bible-api.com
+                # It's more flexible and can handle "John 3:16" directly
+                reference_for_api = match.group(0).strip()
+                
+                try:
+                    url = f"https://bible-api.com/{reference_for_api}?translation=kjv&format=json"
+                    response = requests.get(url)
+                    response.raise_for_status()  # Raise an exception for bad status codes
+                    
+                    data = response.json()
+                    
+                    if data and 'verses' in data:
+                        formatted_verses = []
+                        for verse_data in data['verses']:
+                            verse_num = verse_data.get('verse', '')
+                            text = verse_data.get('text', '').strip()
+                            if verse_num and text:
+                                formatted_verses.append(f"##### {verse_num} {text}")
+                        
+                        if formatted_verses:
+                            new_content.append('\n'.join(formatted_verses))
+                            
+                except requests.exceptions.RequestException as e:
+                    logging.error(f"Could not fetch Bible text for '{reference_for_api}': {e}")
+                except (KeyError, IndexError, TypeError) as e:
+                    logging.warning(f"Could not parse Bible text for '{reference_for_api}': {e}. It might be an invalid reference or API response format changed.")
+            
+        with open(filepath, 'w') as f:
+            f.write('\n'.join(new_content) + '\n') # Add a final newline for consistency
+
+        logging.info("Finished fetching KJV text.")
+
+    except Exception as e:
+        logging.error(f"Error in kjv_text: {e}")
+
+def insert_linebreaks(filepath):
+    """
+    Scans the agenda file and inserts a blank line before every line
+    that starts with '#####' or '###', after removing the heading markers.
+    """
+    logging.info("Inserting line breaks before headings.")
+
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+
+        new_content = []
+        for line in lines:
+            stripped_line = line.lstrip()
+            if stripped_line.startswith("##### ") or stripped_line.startswith("### "):
+                # Add a blank line before the content
+                new_content.append('')
+                # Remove the heading marker and add the content
+                new_content.append(stripped_line[stripped_line.find(' ')+1:].rstrip('\n'))
+            else:
+                new_content.append(line.rstrip('\n'))
+        
+        with open(filepath, 'w') as f:
+            f.write('\n'.join(new_content) + '\n')
+
+        logging.info("Finished inserting line breaks.")
+
+    except Exception as e:
+        logging.error(f"Error in insert_linebreaks: {e}")
+
 def main():
     """Main function to execute all procedures."""
     setup_logging()
@@ -633,6 +706,11 @@ def main():
     # Step 2b
     rename_title(agenda_file)
 
+
+
+
+
+    """
     # Step 2c
     bible_reading(agenda_file)
 
@@ -651,9 +729,20 @@ def main():
     # Step 2h
     pastor_prayer(agenda_file)
 
+    # Fetch and insert KJV text
+    kjv_text(agenda_file)
+
     # Print the markdown file 6 times as a workaround for printer issues
     for _ in range(6):
         print_file(agenda_file, copies=1)
+
+        
+    """
+    
+        
+
+
+
 
     logging.info("Script finished.")
 
