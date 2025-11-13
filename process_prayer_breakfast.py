@@ -77,45 +77,55 @@ def rename_title(filepath):
     logging.info(f"Title renamed to: {new_title_line}")
 
 def bible_reading(filepath):
-    """Adds a bible reading to the file."""
-    logging.info("Step 2c: Adding bible reading.")
+    """Replaces the Bible Reading Rotation section with the reading for the next Saturday."""
+    logging.info("Step 2c: Updating bible reading for the next Saturday.")
     
     today = datetime.now()
-    month_name = today.strftime("%B").upper() # e.g., "NOVEMBER"
-    day_of_month = today.day # e.g., 13
+    days_until_saturday = (5 - today.weekday() + 7) % 7
+    next_saturday_date = today + timedelta(days=days_until_saturday)
+    
+    month_name = next_saturday_date.strftime("%B").upper()
+    day_of_month = next_saturday_date.day
 
     hq2_path = os.path.join(INPUT_DIR, "hq2.md")
     if not os.path.exists(hq2_path):
         logging.error(f"hq2.md not found: {hq2_path}")
         return
 
-    bible_verse = "Bible reading not found for today."
+    bible_verse = "Bible reading not found for next Saturday."
     try:
         with open(hq2_path, 'r') as f:
             content = f.read()
             
-            # Find the section for the current month
             month_pattern = re.compile(rf"## \*\*({month_name})\*\*(.*?)(?=## \*\*|\Z)", re.DOTALL)
             month_match = month_pattern.search(content)
             
             if month_match:
                 month_content = month_match.group(2)
-                # Find the line for the current day
                 day_pattern = re.compile(rf"\|\s*{day_of_month}\s*\|\s*(.*?)\s*\|")
                 day_match = day_pattern.search(month_content)
                 if day_match:
                     bible_verse = day_match.group(1).strip()
     except Exception as e:
         logging.error(f"Error reading or parsing hq2.md: {e}")
-        
-    # Append to the agenda file
+
     try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## Today's Bible Reading\n")
-            f.write(f"{bible_verse}\n")
-        logging.info(f"Added Bible reading: {bible_verse}")
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Replace the content under "## Bible Reading Rotation"
+        new_agenda_content = re.sub(
+            r"(## Bible Reading Rotation\s*\n### ).*?(\n)",
+            rf"\1{bible_verse}\2",
+            agenda_content,
+            flags=re.DOTALL
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        logging.info(f"Updated Bible Reading Rotation to: {bible_verse}")
     except Exception as e:
-        logging.error(f"Error writing Bible reading to agenda file: {e}")
+        logging.error(f"Error updating Bible Reading Rotation in agenda file: {e}")
 
 def prayer_card(filepath):
     """Adds a prayer card section."""

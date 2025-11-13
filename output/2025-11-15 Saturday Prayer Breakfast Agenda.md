@@ -6,7 +6,7 @@
 ## Opening Prayer by TaeWoo Lee
 
 ## Bible Reading Rotation 
-### Hebrews 5:1-14
+### Hebrews 11:1-19
 
 ## Prayer Card Together
 ### Page 37 II—STUDYING: 3. Matthew 4:4
@@ -36,9 +36,6 @@ West Volusia County - Jean Kerr, Carolyn McPhail, Lea Widener,
 ## Prayer Rotation
 ## Closing Prayer by TaeWoo Lee
 ## Food and Fellowship
-## Today's Bible Reading
-Heb. 10:1–18
-
 ### Prayer Card
 ---
 **A special prayer for our community:**
@@ -480,4 +477,4 @@ Orlando, FL 32828
 | 82 | Rev. Michael Griffin | Zion Hope Missionary Baptist Church |
 
 ## Random Scripture for Reflection
-John 3:16, 17
+James 4:13, 14
