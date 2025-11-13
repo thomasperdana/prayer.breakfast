@@ -205,23 +205,24 @@ def prayer_card(filepath):
         logging.error(f"Error updating prayer card: {e}")
 
 def international_reading(filepath):
-    """Adds an international reading from hq1.md."""
-    logging.info("Step 2e: Adding international reading.")
+    """Updates the international reading section with the reading for the next Saturday."""
+    logging.info("Step 2e: Updating international reading for the next Saturday.")
     
     today = datetime.now()
-    day_of_month = today.day
+    days_until_saturday = (5 - today.weekday() + 7) % 7
+    next_saturday_date = today + timedelta(days=days_until_saturday)
+    day_of_month = next_saturday_date.day
 
     hq1_path = os.path.join(INPUT_DIR, "hq1.md")
     if not os.path.exists(hq1_path):
         logging.error(f"hq1.md not found: {hq1_path}")
         return
 
-    international_content = "International reading not found for today."
+    international_content = "International reading not found for next Saturday."
     try:
         with open(hq1_path, 'r') as f:
             content = f.read()
             
-            # Find the section for the current day
             day_pattern = re.compile(rf"## \*\*DAY {day_of_month}\*\*(.*?)(?=## \*\*DAY |\Z)", re.DOTALL)
             day_match = day_pattern.search(content)
             
@@ -230,33 +231,55 @@ def international_reading(filepath):
     except Exception as e:
         logging.error(f"Error reading or parsing hq1.md: {e}")
         
-    # Append to the agenda file
+    # Extract the bible reference from the international_content
+    bible_ref_pattern = re.compile(r"([A-Z\s\d:-]+)$")
+    
+    bible_reference = ""
+    match = bible_ref_pattern.search(international_content)
+    if match:
+        bible_reference = match.group(1).strip()
+        international_content = bible_ref_pattern.sub("", international_content).strip()
+
+    formatted_content = f"### {international_content}\n### {bible_reference}" if bible_reference else f"### {international_content}"
+    logging.info(f"Formatted international reading: {formatted_content}")
+        
     try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## International Reading\n")
-            f.write(f"{international_content}\n")
-        logging.info(f"Added International reading for Day {day_of_month}.")
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Replace the content under "## International Reading by TaeWoo Lee"
+        new_agenda_content = re.sub(
+            r"(## International Reading by TaeWoo Lee\n)(.*?)(\n^## )",
+            rf"\1{formatted_content}\n\3",
+            agenda_content,
+            flags=re.DOTALL | re.MULTILINE
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        logging.info(f"Updated International Reading for Day {day_of_month}.")
     except Exception as e:
-        logging.error(f"Error writing International reading to agenda file: {e}")
+        logging.error(f"Error updating International Reading in agenda file: {e}")
 
 def state_reading(filepath):
-    """Adds a state reading from fl.md."""
-    logging.info("Step 2f: Adding state reading.")
+    """Updates the state reading section with the reading for the next Saturday."""
+    logging.info("Step 2f: Updating state reading for the next Saturday.")
     
     today = datetime.now()
-    day_of_month = today.day
+    days_until_saturday = (5 - today.weekday() + 7) % 7
+    next_saturday_date = today + timedelta(days=days_until_saturday)
+    day_of_month = next_saturday_date.day
 
     fl_path = os.path.join(INPUT_DIR, "fl.md")
     if not os.path.exists(fl_path):
         logging.error(f"fl.md not found: {fl_path}")
         return
 
-    state_content = "State reading not found for today."
+    state_content = "State reading not found for next Saturday."
     try:
         with open(fl_path, 'r') as f:
             content = f.read()
             
-            # Find the section for the current day, including its content
             full_day_pattern = re.compile(rf"(## Day {day_of_month} - .*?)(?=## Day |\Z)", re.DOTALL)
             full_day_match = full_day_pattern.search(content)
             
@@ -268,18 +291,27 @@ def state_reading(filepath):
     except Exception as e:
         logging.error(f"Error reading or parsing fl.md: {e}")
         
-    # Append to the agenda file
     try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## State Reading\n")
-            f.write(f"{state_content}\n")
-        logging.info(f"Added State reading for Day {day_of_month}.")
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Replace the content under "## State Reading by Alvin Beverly"
+        new_agenda_content = re.sub(
+            r"(## State Reading by Alvin Beverly\n)(.*?)(\n^## )",
+            rf"\1{state_content}\n\3",
+            agenda_content,
+            flags=re.DOTALL | re.MULTILINE
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        logging.info(f"Updated State Reading for Day {day_of_month}.")
     except Exception as e:
-        logging.error(f"Error writing State reading to agenda file: {e}")
+        logging.error(f"Error updating State Reading in agenda file: {e}")
 
 def widow_prayer(filepath):
-    """Adds a widow prayer from widow.md."""
-    logging.info("Step 2g: Adding widow prayer.")
+    """Updates the widow prayer section from widow.md."""
+    logging.info("Step 2g: Updating widow prayer.")
     
     widow_path = os.path.join(INPUT_DIR, "widow.md")
     if not os.path.exists(widow_path):
@@ -293,18 +325,27 @@ def widow_prayer(filepath):
     except Exception as e:
         logging.error(f"Error reading widow.md: {e}")
         
-    # Append to the agenda file
     try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## Widow Prayer Calendar\n")
-            f.write(f"{widow_content}\n")
-        logging.info("Added Widow Prayer Calendar content.")
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Replace the content under "## Pray for the Widows by Donald Tise"
+        new_agenda_content = re.sub(
+            r"(## Pray for the Widows by Donald Tise\n)(.*?)(\n^## )",
+            rf"\1{widow_content}\n\3",
+            agenda_content,
+            flags=re.DOTALL | re.MULTILINE
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        logging.info("Updated Widow Prayer content.")
     except Exception as e:
-        logging.error(f"Error writing Widow Prayer Calendar to agenda file: {e}")
+        logging.error(f"Error updating Widow Prayer in agenda file: {e}")
 
 def pastor_prayer(filepath):
-    """Adds a pastor prayer from pastor.md."""
-    logging.info("Step 2h: Adding pastor prayer.")
+    """Updates the pastor prayer section from pastor.md."""
+    logging.info("Step 2h: Updating pastor prayer.")
     
     pastor_path = os.path.join(INPUT_DIR, "pastor.md")
     if not os.path.exists(pastor_path):
@@ -318,14 +359,23 @@ def pastor_prayer(filepath):
     except Exception as e:
         logging.error(f"Error reading pastor.md: {e}")
         
-    # Append to the agenda file
     try:
-        with open(filepath, 'a') as f:
-            f.write(f"\n## Pastor Directory for Prayer\n")
-            f.write(f"{pastor_content}\n")
-        logging.info("Added Pastor Directory for Prayer content.")
+        with open(filepath, 'r') as f:
+            agenda_content = f.read()
+
+        # Replace the content under "## Pray for Local Pastor by Johnny Perry"
+        new_agenda_content = re.sub(
+            r"(## Pray for Local Pastor by Johnny Perry\n)(.*?)(\n^## )",
+            rf"\1{pastor_content}\n\3",
+            agenda_content,
+            flags=re.DOTALL | re.MULTILINE
+        )
+
+        with open(filepath, 'w') as f:
+            f.write(new_agenda_content)
+        logging.info("Updated Pastor Prayer content.")
     except Exception as e:
-        logging.error(f"Error writing Pastor Directory to agenda file: {e}")
+        logging.error(f"Error updating Pastor Prayer in agenda file: {e}")
 
 # Try to import the 'markdown' library; if not available, provide a minimal fallback converter.
 try:

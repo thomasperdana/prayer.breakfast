@@ -12,53 +12,27 @@
 ### Page 38 II—STUDYING 4.  II Timothy 3:16, 17
   
 ## International Reading by TaeWoo Lee
-### Finland—Lasse Schultz, Trustee (Hannele).
-### USA Zone 3—John Ortega, Trustee (Pam).
-Gideon and Auxiliary state and camp officers and members of Finland and USA Zone 3—Rocky Mountain, Southwest, Texas. State and national conventions, including all attendees and the officers, speakers, and international representatives involved. Gideons and Auxiliary from Trinidad/Tobago, Turks & Caicos Islands, Virgin Islands, Albania, Armenia, and Bosnia & Herzegovina. Afghanistan*. Our core value of a membership of business and professional men, except clergymen, who accept the biblical standard of marriage being between one biological man and one biological woman.
-### Ephesians 5:31
+### USA Zone 10—Jerry Clunan, Trustee (Rhea). USA Zone 11—Charley Lee Logwood, Trustee (Brenda). Gideon and Auxiliary state and camp officers and members of USA Zone 10—Delmardic, Pennsylvania, West Virginia. Also, USA Zone 11—North Carolina, South Carolina, Virginia. For those in danger of death through suicide, illness, or other reasons to be reached with the Gospel in time. Gideons and Auxiliary from Italy, Luxembourg, Malta, and the Netherlands. Mauritania*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Separated Walk.
+### 2 CORINTHIANS 6:14-18
 
 ## State Reading by Alvin Beverly
-### Randy Bartlein (Mary) - STATE CHURCH MINISTRY COORDINATOR
-Your camp Church Ministry chairman: ____________________
-Camps: Baker County, Clay County South, JAX Northwest, JAX West
-### Joshua 1:9
+## Day 15 - Gideon Leadership—SE Region
 
-## Pray for the Widows by Donald Tise
-### North Region – NO7 (cont'd)
-NE Volusia County - Kathryn Teter,
-West Volusia County - Jean Kerr, Carolyn McPhail, Lea Widener,
-
-## Pray for Local Pastor by Johnny Perry
-### New Mt. Calvary Baptist Church
-### Rev. G.W. Warren
-
-## Prayer Request
-## Prayer Rotation
-## Closing Prayer by TaeWoo Lee
-## Food and Fellowship
-## International Reading
-R.O.C. (Taiwan)—Jim Liou, Trustee (Lily). USA Zone 8—C. Dan Scott, Trustee (Faith). Gideon and Auxiliary state and camp officers and members of the Republic of China (Taiwan) and USA Zone 8—Kentucky, Mississippi, Tennessee. For a spiritual revival in all Gideon countries, and for the Christian communities in all Gideon countries to grow in numbers and strength. Gideons and Auxiliary from Andorra, Austria, Belgium, British Isles, Cyprus, and Denmark. Libya*. Our core value of an ongoing emphasis on the importance of fulfilling the spiritual objective of being Men and Women of Faith. HEBREWS 11:6
-
-## State Reading
-## Day 13 - Gideon Leadership—North Region
-
-### Bob Hahn (SALAMA) - STATE REGIONAL DIRECTOR
-*Proverbs 3:5-6*
+### Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR
+*Psalm 19:7-8*
 
 **Area Directors:**
-- **NO3** - Hunter Page
-- **NO4** - Steven Williams (Sylvia)
-- **NO5** - Charlie Marineau (Belinda)
-- **NO6** - Randy Boswell (Gail)
-- **NO7** - John Evans (Connie)
-- **NO8** - Kent Kolb (Vicki)
-- **NO20** - Wayne Gabriel (Kellie)
+- **SE09** - Jack Walton (Diane)
+- **SE12** - Mike McGarrigle (Lisa)
+- **SE17** - Stephen Cornwell (Carol)
+- **SE18** - Joseph Tang
+- **SE19** - Javier Morejon (Christie)
 
-**Camps:** Melbourne/Viera, Palm Bay
+**Camps:** Palm Beach Central, Palm Beach North
 
 ---
 
-## Widow Prayer Calendar
+## Pray for the Widows by Donald Tise
 # Florida Association - Widows Daily Prayer Calendar 2025-2026
 
 **"Honor widows" - 1 TIMOTHY 5:3**
@@ -387,7 +361,7 @@ Orlando, FL 32828
 
 *Document converted from PDF to Markdown format*
 
-## Pastor Directory for Prayer
+## Pray for Local Pastor by Johnny Perry
 # Pastor Directory
 | # | Pastor Name | Church Name |
 | 2 | Rev. Byrd | Byrd Memorial Church of Midway |
@@ -470,5 +444,9 @@ Orlando, FL 32828
 | 81 | Rev. Shane House | Whole World Gospel Church |
 | 82 | Rev. Michael Griffin | Zion Hope Missionary Baptist Church |
 
+## Prayer Request
+## Prayer Rotation
+## Closing Prayer by TaeWoo Lee
+## Food and Fellowship
 ## Random Scripture for Reflection
-John 16:13, 14
+James 4:4
