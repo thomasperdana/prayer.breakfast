@@ -1,0 +1,94 @@
+2025-11-13 18:10:33 - root - INFO - [main_program.py:262] - ============================================================
+2025-11-13 18:10:33 - root - INFO - [main_program.py:263] - Application Starting
+2025-11-13 18:10:33 - root - INFO - [main_program.py:264] - ============================================================
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 1 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:66] - Procedure 01: Initializing application configuration
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:67] - Loading default configuration values
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:81] - Last week date: 2025-11-08
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:82] - Next week date: 2025-11-15
+2025-11-13 18:10:33 - __main__ - ERROR - [main_program.py:101] - Failed to create next week agenda: [Errno 13] Permission denied: 'output/2025-11-15 Saturday Prayer Breakfast Agenda.md'
+2025-11-13 18:10:33 - root - WARNING - [main_program.py:288] - Procedure 1 completed with issues
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 2 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:110] - Procedure 02: Validating system requirements
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:111] - Checking Python version and dependencies
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 2 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 3 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:118] - Procedure 03: Loading environment variables
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:119] - Reading .env file if exists
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 3 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 4 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:126] - Procedure 04: Establishing database connection
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:127] - Database connection parameters validated
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 4 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 5 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:134] - Procedure 05: Initializing cache system
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:135] - Cache directory created successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 5 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 6 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:142] - Procedure 06: Loading user preferences
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:143] - User preferences loaded from config file
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 6 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 7 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:150] - Procedure 07: Setting up security protocols
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:151] - Encryption keys validated
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 7 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 8 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:158] - Procedure 08: Initializing API connections
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:159] - API endpoints configured
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 8 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 9 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:166] - Procedure 09: Loading data models
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:167] - Data schemas validated
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 9 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 10 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:174] - Procedure 10: Setting up notification system
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:175] - Notification channels configured
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 10 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 11 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:182] - Procedure 11: Initializing background tasks
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:183] - Task scheduler started
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 11 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 12 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:190] - Procedure 12: Setting up monitoring system
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:191] - Performance metrics enabled
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 12 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 13 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:198] - Procedure 13: Loading plugins and extensions
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:199] - Plugin directory scanned
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 13 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 14 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:206] - Procedure 14: Initializing session management
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:207] - Session storage configured
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 14 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 15 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:214] - Procedure 15: Setting up error handling
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:215] - Global exception handler registered
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 15 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 16 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:222] - Procedure 16: Loading resource files
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:223] - Static resources indexed
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 16 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 17 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:230] - Procedure 17: Initializing data validation
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:231] - Validation rules compiled
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 17 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 18 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:238] - Procedure 18: Setting up backup system
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:239] - Backup schedule configured
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 18 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 19 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:246] - Procedure 19: Initializing analytics
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:247] - Analytics endpoints ready
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 19 completed successfully
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:279] - Executing procedure 20 of 20
+2025-11-13 18:10:33 - __main__ - INFO - [main_program.py:254] - Procedure 20: Finalizing startup sequence
+2025-11-13 18:10:33 - __main__ - DEBUG - [main_program.py:255] - All systems operational
+2025-11-13 18:10:33 - root - DEBUG - [main_program.py:285] - Procedure 20 completed successfully
+2025-11-13 18:10:33 - root - INFO - [main_program.py:295] - ============================================================
+2025-11-13 18:10:33 - root - INFO - [main_program.py:296] - Execution Summary
+2025-11-13 18:10:33 - root - INFO - [main_program.py:297] - ============================================================
+2025-11-13 18:10:33 - root - INFO - [main_program.py:298] - Total Procedures: 20
+2025-11-13 18:10:33 - root - INFO - [main_program.py:299] - Successful: 19
+2025-11-13 18:10:33 - root - INFO - [main_program.py:300] - Failed: 1
+2025-11-13 18:10:33 - root - INFO - [main_program.py:301] - ============================================================
+2025-11-13 18:10:33 - root - WARNING - [main_program.py:307] - Application started with 1 errors

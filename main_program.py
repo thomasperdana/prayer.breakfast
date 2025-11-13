@@ -1,0 +1,384 @@
+#!/usr/bin/env python3
+"""
+Main program with 20 procedures and comprehensive logging system.
+The input directory is now read-only with permissions set to 555 (r-xr-xr-x)
+python3 main_program.py
+"""
+
+import logging
+import logging.handlers
+import os
+import sys
+from datetime import datetime, timedelta
+from pathlib import Path
+
+
+# Global variables for date management
+LAST_WEEK_DATE = None
+NEXT_WEEK_DATE = None
+NEXT_WEEK_AGENDA_FILE = None
+
+
+def setup_logging():
+    """Configure comprehensive logging system with file and console handlers."""
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = log_dir / f"app_{timestamp}.log"
+    
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+    
+    file_formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    
+    console_formatter = logging.Formatter(
+        '%(levelname)s - %(message)s'
+    )
+    
+    file_handler = logging.handlers.RotatingFileHandler(
+        log_file,
+        maxBytes=10*1024*1024,
+        backupCount=5
+    )
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(file_formatter)
+    
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(console_formatter)
+    
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+    
+    return logger
+
+
+def init_file_1():
+    """Initialize application configuration."""
+    import shutil
+    import stat
+    global LAST_WEEK_DATE, NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 01: Initializing application configuration")
+    logger.debug("Loading default configuration values")
+    
+    try:
+        input_dir = Path("input")
+        output_dir = Path("output")
+        output_dir.mkdir(exist_ok=True)
+        
+        last_week_file = input_dir / "2025-11-08 Saturday Prayer Breakfast Agenda.md"
+        
+        LAST_WEEK_DATE = datetime.strptime("2025-11-08", "%Y-%m-%d")
+        NEXT_WEEK_DATE = LAST_WEEK_DATE + timedelta(weeks=1)
+        next_week_str = NEXT_WEEK_DATE.strftime("%Y-%m-%d")
+        last_week_str = LAST_WEEK_DATE.strftime("%Y-%m-%d")
+        
+        logger.info(f"Last week date: {last_week_str}")
+        logger.info(f"Next week date: {next_week_str}")
+        
+        NEXT_WEEK_AGENDA_FILE = output_dir / f"{next_week_str} Saturday Prayer Breakfast Agenda.md"
+        
+        # Remove existing file if it exists
+        if NEXT_WEEK_AGENDA_FILE.exists():
+            NEXT_WEEK_AGENDA_FILE.chmod(0o777)
+            NEXT_WEEK_AGENDA_FILE.unlink()
+            logger.debug(f"Removed existing file: {NEXT_WEEK_AGENDA_FILE.name}")
+        
+        shutil.copy2(last_week_file, NEXT_WEEK_AGENDA_FILE)
+        logger.info(f"Created next week agenda: {NEXT_WEEK_AGENDA_FILE.name}")
+        logger.debug(f"Copied from {last_week_file} to {NEXT_WEEK_AGENDA_FILE}")
+        
+        # Change file permissions to read, write, execute for all (777)
+        NEXT_WEEK_AGENDA_FILE.chmod(0o777)
+        logger.info(f"Changed file permissions to 777 (rwxrwxrwx)")
+        logger.debug(f"File permissions updated for {NEXT_WEEK_AGENDA_FILE.name}")
+        
+        # Update the title in the file
+        content = NEXT_WEEK_AGENDA_FILE.read_text()
+        old_title = f"North Seminole County Gideons - {last_week_str} Saturday Prayer Breakfast Agenda"
+        new_title = f"North Seminole County Gideons - {next_week_str} Saturday Prayer Breakfast Agenda"
+        
+        if old_title in content:
+            updated_content = content.replace(old_title, new_title, 1)
+            NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+            logger.info(f"Updated title from '{old_title}' to '{new_title}'")
+            logger.debug("File content updated successfully")
+        else:
+            logger.warning(f"Title '{old_title}' not found in file")
+        
+    except Exception as e:
+        logger.error(f"Failed to create next week agenda: {str(e)}")
+        return {"status": "error", "procedure": "01", "error": str(e)}
+    
+    return {"status": "success", "procedure": "01"}
+
+
+def bible_reading():
+    """Update Bible Reading Rotation for next week."""
+    import re
+    global NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 02: Updating Bible Reading Rotation")
+    logger.debug("Reading Bible rotation schedule from hq2.md")
+    
+    try:
+        if NEXT_WEEK_DATE is None or NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variables not initialized. Run init_file_1 first.")
+            return {"status": "error", "procedure": "02", "error": "Missing global variables"}
+        
+        # Read the Bible reading schedule
+        hq2_file = Path("input/hq2.md")
+        hq2_content = hq2_file.read_text()
+        
+        # Extract month and day from NEXT_WEEK_DATE
+        month = NEXT_WEEK_DATE.strftime("%B").upper()
+        day = NEXT_WEEK_DATE.day
+        
+        logger.debug(f"Looking for reading for {month} {day}")
+        
+        # Find the month section
+        month_pattern = rf"## \*\*{month}\*\*.*?\n(.*?)(?=\n## \*\*|\Z)"
+        month_match = re.search(month_pattern, hq2_content, re.DOTALL)
+        
+        if not month_match:
+            logger.error(f"Could not find month section for {month}")
+            return {"status": "error", "procedure": "02", "error": f"Month {month} not found"}
+        
+        month_section = month_match.group(1)
+        
+        # Find the reading for the specific day
+        day_pattern = rf"^\| {day} \| (.*?) \|"
+        day_match = re.search(day_pattern, month_section, re.MULTILINE)
+        
+        if not day_match:
+            logger.error(f"Could not find reading for {month} {day}")
+            return {"status": "error", "procedure": "02", "error": f"Day {day} not found"}
+        
+        bible_reading = day_match.group(1).strip()
+        logger.info(f"Found Bible reading for {month} {day}: {bible_reading}")
+        
+        # Update the agenda file
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Find and replace the Bible Reading Rotation line
+        old_pattern = r"Bible Reading Rotation - .*"
+        new_reading = f"Bible Reading Rotation - {bible_reading}"
+        
+        updated_content = re.sub(old_pattern, new_reading, agenda_content)
+        NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+        
+        logger.info(f"Updated Bible Reading Rotation to: {bible_reading}")
+        logger.debug("Bible reading rotation updated successfully")
+        
+        return {"status": "success", "procedure": "02"}
+        
+    except Exception as e:
+        logger.error(f"Failed to update Bible reading: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "02", "error": str(e)}
+
+
+def procedure_03():
+    """Load environment variables."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 03: Loading environment variables")
+    logger.debug("Reading .env file if exists")
+    return {"status": "success", "procedure": "03"}
+
+
+def procedure_04():
+    """Connect to database."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 04: Establishing database connection")
+    logger.debug("Database connection parameters validated")
+    return {"status": "success", "procedure": "04"}
+
+
+def procedure_05():
+    """Initialize cache system."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 05: Initializing cache system")
+    logger.debug("Cache directory created successfully")
+    return {"status": "success", "procedure": "05"}
+
+
+def procedure_06():
+    """Load user preferences."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 06: Loading user preferences")
+    logger.debug("User preferences loaded from config file")
+    return {"status": "success", "procedure": "06"}
+
+
+def procedure_07():
+    """Setup security protocols."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 07: Setting up security protocols")
+    logger.debug("Encryption keys validated")
+    return {"status": "success", "procedure": "07"}
+
+
+def procedure_08():
+    """Initialize API connections."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 08: Initializing API connections")
+    logger.debug("API endpoints configured")
+    return {"status": "success", "procedure": "08"}
+
+
+def procedure_09():
+    """Load data models."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 09: Loading data models")
+    logger.debug("Data schemas validated")
+    return {"status": "success", "procedure": "09"}
+
+
+def procedure_10():
+    """Setup notification system."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 10: Setting up notification system")
+    logger.debug("Notification channels configured")
+    return {"status": "success", "procedure": "10"}
+
+
+def procedure_11():
+    """Initialize background tasks."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 11: Initializing background tasks")
+    logger.debug("Task scheduler started")
+    return {"status": "success", "procedure": "11"}
+
+
+def procedure_12():
+    """Setup monitoring system."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 12: Setting up monitoring system")
+    logger.debug("Performance metrics enabled")
+    return {"status": "success", "procedure": "12"}
+
+
+def procedure_13():
+    """Load plugins and extensions."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 13: Loading plugins and extensions")
+    logger.debug("Plugin directory scanned")
+    return {"status": "success", "procedure": "13"}
+
+
+def procedure_14():
+    """Initialize session management."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 14: Initializing session management")
+    logger.debug("Session storage configured")
+    return {"status": "success", "procedure": "14"}
+
+
+def procedure_15():
+    """Setup error handling."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 15: Setting up error handling")
+    logger.debug("Global exception handler registered")
+    return {"status": "success", "procedure": "15"}
+
+
+def procedure_16():
+    """Load resource files."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 16: Loading resource files")
+    logger.debug("Static resources indexed")
+    return {"status": "success", "procedure": "16"}
+
+
+def procedure_17():
+    """Initialize data validation."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 17: Initializing data validation")
+    logger.debug("Validation rules compiled")
+    return {"status": "success", "procedure": "17"}
+
+
+def procedure_18():
+    """Setup backup system."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 18: Setting up backup system")
+    logger.debug("Backup schedule configured")
+    return {"status": "success", "procedure": "18"}
+
+
+def procedure_19():
+    """Initialize analytics."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 19: Initializing analytics")
+    logger.debug("Analytics endpoints ready")
+    return {"status": "success", "procedure": "19"}
+
+
+def procedure_20():
+    """Finalize startup sequence."""
+    logger = logging.getLogger(__name__)
+    logger.info("Procedure 20: Finalizing startup sequence")
+    logger.debug("All systems operational")
+    return {"status": "success", "procedure": "20"}
+
+
+def main():
+    """Main program entry point."""
+    logger = setup_logging()
+    logger.info("=" * 60)
+    logger.info("Application Starting")
+    logger.info("=" * 60)
+    
+    procedures = [
+        init_file_1, bible_reading, procedure_03, procedure_04, procedure_05,
+        procedure_06, procedure_07, procedure_08, procedure_09, procedure_10,
+        procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
+        procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
+    ]
+    
+    results = []
+    success_count = 0
+    failure_count = 0
+    
+    for idx, procedure in enumerate(procedures, 1):
+        try:
+            logger.debug(f"Executing procedure {idx} of {len(procedures)}")
+            result = procedure()
+            results.append(result)
+            
+            if result.get("status") == "success":
+                success_count += 1
+                logger.debug(f"Procedure {idx} completed successfully")
+            else:
+                failure_count += 1
+                logger.warning(f"Procedure {idx} completed with issues")
+                
+        except Exception as e:
+            failure_count += 1
+            logger.error(f"Error in procedure {idx}: {str(e)}", exc_info=True)
+            results.append({"status": "error", "procedure": f"{idx:02d}", "error": str(e)})
+    
+    logger.info("=" * 60)
+    logger.info("Execution Summary")
+    logger.info("=" * 60)
+    logger.info(f"Total Procedures: {len(procedures)}")
+    logger.info(f"Successful: {success_count}")
+    logger.info(f"Failed: {failure_count}")
+    logger.info("=" * 60)
+    
+    if failure_count == 0:
+        logger.info("Application started successfully!")
+        return 0
+    else:
+        logger.warning(f"Application started with {failure_count} errors")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

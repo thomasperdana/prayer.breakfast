@@ -1,0 +1,104 @@
+2025-11-13 18:25:32 - root - INFO - [main_program.py:334] - ============================================================
+2025-11-13 18:25:32 - root - INFO - [main_program.py:335] - Application Starting
+2025-11-13 18:25:32 - root - INFO - [main_program.py:336] - ============================================================
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 1 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:67] - Procedure 01: Initializing application configuration
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:68] - Loading default configuration values
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:82] - Last week date: 2025-11-08
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:83] - Next week date: 2025-11-15
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:91] - Removed existing file: 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:94] - Created next week agenda: 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:95] - Copied from input/2025-11-08 Saturday Prayer Breakfast Agenda.md to output/2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:99] - Changed file permissions to 777 (rwxrwxrwx)
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:100] - File permissions updated for 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:110] - Updated title from 'North Seminole County Gideons - 2025-11-08 Saturday Prayer Breakfast Agenda' to 'North Seminole County Gideons - 2025-11-15 Saturday Prayer Breakfast Agenda'
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:111] - File content updated successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 1 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 2 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:128] - Procedure 02: Updating Bible Reading Rotation
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:129] - Reading Bible rotation schedule from hq2.md
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:144] - Looking for reading for NOVEMBER 15
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:165] - Found Bible reading for NOVEMBER 15: Hebrews 11:1-19
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:177] - Updated Bible Reading Rotation to: Hebrews 11:1-19
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:178] - Bible reading rotation updated successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 2 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 3 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:190] - Procedure 03: Loading environment variables
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:191] - Reading .env file if exists
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 3 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 4 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:198] - Procedure 04: Establishing database connection
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:199] - Database connection parameters validated
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 4 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 5 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:206] - Procedure 05: Initializing cache system
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:207] - Cache directory created successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 5 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 6 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:214] - Procedure 06: Loading user preferences
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:215] - User preferences loaded from config file
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 6 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 7 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:222] - Procedure 07: Setting up security protocols
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:223] - Encryption keys validated
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 7 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 8 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:230] - Procedure 08: Initializing API connections
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:231] - API endpoints configured
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 8 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 9 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:238] - Procedure 09: Loading data models
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:239] - Data schemas validated
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 9 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 10 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:246] - Procedure 10: Setting up notification system
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:247] - Notification channels configured
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 10 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 11 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:254] - Procedure 11: Initializing background tasks
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:255] - Task scheduler started
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 11 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 12 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:262] - Procedure 12: Setting up monitoring system
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:263] - Performance metrics enabled
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 12 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 13 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:270] - Procedure 13: Loading plugins and extensions
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:271] - Plugin directory scanned
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 13 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 14 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:278] - Procedure 14: Initializing session management
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:279] - Session storage configured
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 14 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 15 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:286] - Procedure 15: Setting up error handling
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:287] - Global exception handler registered
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 15 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 16 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:294] - Procedure 16: Loading resource files
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:295] - Static resources indexed
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 16 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 17 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:302] - Procedure 17: Initializing data validation
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:303] - Validation rules compiled
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 17 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 18 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:310] - Procedure 18: Setting up backup system
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:311] - Backup schedule configured
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 18 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 19 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:318] - Procedure 19: Initializing analytics
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:319] - Analytics endpoints ready
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 19 completed successfully
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:351] - Executing procedure 20 of 20
+2025-11-13 18:25:32 - __main__ - INFO - [main_program.py:326] - Procedure 20: Finalizing startup sequence
+2025-11-13 18:25:32 - __main__ - DEBUG - [main_program.py:327] - All systems operational
+2025-11-13 18:25:32 - root - DEBUG - [main_program.py:357] - Procedure 20 completed successfully
+2025-11-13 18:25:32 - root - INFO - [main_program.py:367] - ============================================================
+2025-11-13 18:25:32 - root - INFO - [main_program.py:368] - Execution Summary
+2025-11-13 18:25:32 - root - INFO - [main_program.py:369] - ============================================================
+2025-11-13 18:25:32 - root - INFO - [main_program.py:370] - Total Procedures: 20
+2025-11-13 18:25:32 - root - INFO - [main_program.py:371] - Successful: 20
+2025-11-13 18:25:32 - root - INFO - [main_program.py:372] - Failed: 0
+2025-11-13 18:25:32 - root - INFO - [main_program.py:373] - ============================================================
+2025-11-13 18:25:32 - root - INFO - [main_program.py:376] - Application started successfully!
