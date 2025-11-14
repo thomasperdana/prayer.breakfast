@@ -513,11 +513,11 @@ def widow_prayer():
         return {"status": "error", "procedure": "06", "error": str(e)}
 
 
-def procedure_07():
-    """Setup security protocols."""
+def pastor_prayer():
+    """Handle pastor prayer section for next week."""
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 07: Setting up security protocols")
-    logger.debug("Encryption keys validated")
+    logger.info("Procedure 07: Handling Pastor Prayer")
+    logger.debug("Pastor prayer details processed")
     return {"status": "success", "procedure": "07"}
 
 
@@ -634,7 +634,7 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        widow_prayer, procedure_07, procedure_08, procedure_09, procedure_10,
+        widow_prayer, pastor_prayer, procedure_08, procedure_09, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
