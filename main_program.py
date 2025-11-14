@@ -2,6 +2,9 @@
 """
 Main program with 20 procedures and comprehensive logging system.
 The input directory is now read-only with permissions set to 555 (r-xr-xr-x)
+smtp app password:
+ktnd vioj bxxu aika
+qE7!sP9*bK2@zX4#
 python3 main_program.py
 """
 
@@ -791,20 +794,113 @@ def kjv_verses():
         return {"status": "error", "procedure": "09", "error": str(e)}
 
 
-def procedure_10():
-    """Setup notification system."""
+def print_v2_1x():
+    """Prints the NEXT_WEEK_AGENDA_FILE to the default printer."""
+    import subprocess
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 10: Setting up notification system")
-    logger.debug("Notification channels configured")
-    return {"status": "success", "procedure": "10"}
+    logger.info("Procedure 10: Printing NEXT_WEEK_AGENDA_FILE to default printer")
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variable NEXT_WEEK_AGENDA_FILE not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "10", "error": "Missing global variable"}
+        
+        file_to_print = NEXT_WEEK_AGENDA_FILE.resolve() # Get absolute path
+        
+        logger.debug(f"Printing {file_to_print} to default printer")
+        # Using 'lp' command for printing on macOS/Linux
+        # -n 1: print 1 copy
+        result = subprocess.run(['lp', '-n', '1', str(file_to_print)], capture_output=True, text=True, check=False)
+        
+        if result.returncode != 0:
+            logger.error(f"Printing failed: {result.stderr.strip()}")
+            return {"status": "error", "procedure": "10", "error": f"Printing failed: {result.stderr.strip()}"}
+        else:
+            logger.debug(f"Print command output: {result.stdout.strip()}")
+        
+        logger.info("NEXT_WEEK_AGENDA_FILE printed successfully.")
+        
+        return {"status": "success", "procedure": "10"}
+        
+    except Exception as e:
+        logger.error(f"Failed to print NEXT_WEEK_AGENDA_FILE: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "10", "error": str(e)}
 
 
-def procedure_11():
-    """Initialize background tasks."""
+def email_v2():
+    """Sends the Prayer Breakfast Agenda via email with the markdown file as an attachment."""
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    from email.mime.base import MIMEBase
+    from email import encoders
+    import os
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 11: Initializing background tasks")
-    logger.debug("Task scheduler started")
-    return {"status": "success", "procedure": "11"}
+    # User provided details
+    EMAIL_FROM = "ThomasPerdana@gmail.com"
+    EMAIL_TO = "gideon.northseminole@gmail.com"
+    SUBJECT = "Prayer Breakfast Agenda"
+    EMAIL_PASSWORD = "ktnd vioj bxxu aika" # User's Gmail App Password
+    
+    # SMTP Configuration from user
+    SMTP_SERVER = "smtp.gmail.com"
+    SMTP_PORT = 587 # Using TLS port
+    
+    logger.info(f"Preparing to send email from {EMAIL_FROM} to {EMAIL_TO} with subject: {SUBJECT}")
+
+    if NEXT_WEEK_AGENDA_FILE is None:
+        logger.error("NEXT_WEEK_AGENDA_FILE is not set. Run init_file first.")
+        return {"status": "error", "procedure": "11", "error": "NEXT_WEEK_AGENDA_FILE not set"}
+
+    attachment_path = NEXT_WEEK_AGENDA_FILE.resolve()
+    
+    # Create a multipart message
+    msg = MIMEMultipart()
+    msg['From'] = EMAIL_FROM
+    msg['To'] = EMAIL_TO
+    msg['Subject'] = SUBJECT
+
+    # Attach the file
+    try:
+        with open(attachment_path, "rb") as attachment:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+        encoders.encode_base64(part)
+        part.add_header(
+            'Content-Disposition',
+            f"attachment; filename= {os.path.basename(attachment_path)}",
+        )
+        msg.attach(part)
+        logger.info(f"Attached file: {os.path.basename(attachment_path)}")
+    except FileNotFoundError:
+        logger.error(f"Attachment file not found: {attachment_path}")
+        return {"status": "error", "procedure": "11", "error": f"Attachment file not found: {attachment_path}"}
+    except Exception as e:
+        logger.error(f"Error attaching file: {e}")
+        return {"status": "error", "procedure": "11", "error": f"Error attaching file: {e}"}
+
+    # Add body to email
+    body = "Please find the attached Prayer Breakfast Agenda.\n\nRegards,\nYour Application"
+    msg.attach(MIMEText(body, 'plain'))
+
+    # --- EMAIL SENDING LOGIC ---
+    try:
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls() # Secure the connection
+        server.login(EMAIL_FROM, EMAIL_PASSWORD)
+        text = msg.as_string()
+        server.sendmail(EMAIL_FROM, EMAIL_TO, text)
+        server.quit()
+        logger.info("Email sent successfully.")
+        return {"status": "success", "procedure": "11"}
+    except Exception as e:
+        logger.error(f"Failed to send email: {e}")
+        return {"status": "error", "procedure": "11", "error": f"Failed to send email: {e}"}
+    # --- END EMAIL SENDING LOGIC ---
 
 
 def procedure_12():
@@ -888,8 +984,8 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        widow_prayer, pastor_prayer, print_v1_6x, kjv_verses, procedure_10,
-        procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
+        widow_prayer, pastor_prayer, print_v1_6x, kjv_verses, print_v2_1x,
+        email_v2, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
     
