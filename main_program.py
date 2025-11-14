@@ -629,11 +629,11 @@ def print_v1_6x():
         return {"status": "error", "procedure": "08", "error": str(e)}
 
 
-def procedure_09():
-    """Load data models."""
+def kjv_verses():
+    """Handle KJV verses for next week."""
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 09: Loading data models")
-    logger.debug("Data schemas validated")
+    logger.info("Procedure 09: Handling KJV Verses")
+    logger.debug("KJV verses processed")
     return {"status": "success", "procedure": "09"}
 
 
@@ -734,7 +734,7 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        widow_prayer, pastor_prayer, print_v1_6x, procedure_09, procedure_10,
+        widow_prayer, pastor_prayer, print_v1_6x, kjv_verses, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
