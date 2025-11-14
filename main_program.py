@@ -426,12 +426,91 @@ def state_reading():
         return {"status": "error", "procedure": "05", "error": str(e)}
 
 
-def procedure_06():
-    """Load user preferences."""
+def widow_prayer():
+    """Update Widow Prayer for next week."""
+    import re
+    global NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 06: Loading user preferences")
-    logger.debug("User preferences loaded from config file")
-    return {"status": "success", "procedure": "06"}
+    logger.info("Procedure 06: Updating Widow Prayer")
+    logger.debug("Reading Widow schedule from widow.md")
+    
+    try:
+        if NEXT_WEEK_DATE is None or NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variables not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "06", "error": "Missing global variables"}
+        
+        # Read the widow prayer schedule
+        widow_file = Path("input/widow.md")
+        widow_content = widow_file.read_text()
+        
+        # Get the day number from NEXT_WEEK_DATE
+        day_number = NEXT_WEEK_DATE.day
+        
+        logger.debug(f"Looking for section {day_number}")
+        
+        # Find the section in widow.md (### {day_number}. ...)
+        section_pattern = rf"### {day_number}\. ([^\n]+)\n((?:- [^\n]+\n)*)"
+        section_match = re.search(section_pattern, widow_content)
+        
+        if not section_match:
+            logger.error(f"Could not find section {day_number} in widow.md")
+            return {"status": "error", "procedure": "06", "error": f"Section {day_number} not found"}
+        
+        section_title = section_match.group(1).strip()
+        widow_list = section_match.group(2).strip()
+        
+        # Format the widow list - convert markdown list to comma-separated format
+        # Extract widows from the list items
+        widows = re.findall(r'- ([^\n]+)', widow_list)
+        
+        # Group widows by camp
+        camps_data = {}
+        for widow_entry in widows:
+            parts = widow_entry.split(', ', 1)
+            if len(parts) == 2:
+                name = parts[0].strip()
+                camp = parts[1].strip()
+                if camp not in camps_data:
+                    camps_data[camp] = []
+                camps_data[camp].append(name)
+            else:
+                logger.warning(f"Skipping malformed widow entry: {widow_entry}")
+        
+        formatted_parts = []
+        for camp, names_list in camps_data.items():
+            formatted_parts.append(f"{camp} - {', '.join(names_list)}, ")
+        
+        formatted_widow_text = " - ".join(formatted_parts)
+
+        
+        new_widow_prayer = f"Pray for the Widows by Donald Tise - {day_number}. {section_title}\n{formatted_widow_text}"
+        
+        logger.info(f"Found Widow Prayer for section {day_number}: {section_title}")
+        logger.debug(f"Formatted content:\n{new_widow_prayer}")
+        
+        # Update the agenda file
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Find and replace the Widow Prayer section
+        old_pattern = r"Pray for the Widows by [^\n]+\n[^\n]+"
+        
+        # Check if pattern exists
+        if re.search(old_pattern, agenda_content, re.DOTALL):
+            updated_content = re.sub(old_pattern, new_widow_prayer, agenda_content, flags=re.DOTALL)
+            NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+            
+            logger.info(f"Updated Widow Prayer to section {day_number}")
+            logger.debug("Widow prayer updated successfully")
+        else:
+            logger.error("Could not find Widow Prayer section to replace")
+            return {"status": "error", "procedure": "06", "error": "Widow Prayer section not found"}
+        
+        return {"status": "success", "procedure": "06"}
+        
+    except Exception as e:
+        logger.error(f"Failed to update Widow Prayer: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "06", "error": str(e)}
 
 
 def procedure_07():
@@ -555,7 +634,7 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        procedure_06, procedure_07, procedure_08, procedure_09, procedure_10,
+        widow_prayer, procedure_07, procedure_08, procedure_09, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
