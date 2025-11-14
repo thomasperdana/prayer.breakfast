@@ -515,10 +515,81 @@ def widow_prayer():
 
 def pastor_prayer():
     """Handle pastor prayer section for next week."""
+    import re
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
     logger.info("Procedure 07: Handling Pastor Prayer")
-    logger.debug("Pastor prayer details processed")
-    return {"status": "success", "procedure": "07"}
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variable NEXT_WEEK_AGENDA_FILE not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "07", "error": "Missing global variable"}
+        
+        pastor_file = Path("input/pastor.md")
+        pastor_content = pastor_file.read_text()
+        
+        pastor_entries = []
+        # Regex to capture Pastor Name and Church Name from the markdown table
+        # It handles cases where Pastor Name or Church Name might be empty
+        # The pattern looks for lines starting with '|', followed by a number, then captures two groups
+        # Group 1: Pastor Name (can be empty)
+        # Group 2: Church Name (can be empty)
+        for line in pastor_content.splitlines():
+            match = re.match(r'\|\s*\d+\s*\|\s*([^|]*?)\s*\|\s*([^|]*?)\s*\|', line)
+            if match:
+                pastor_name = match.group(1).strip()
+                church_name = match.group(2).strip()
+                
+                if pastor_name and church_name:
+                    formatted_entry = f"Pray for Local Pastor by Johnny Perry - {church_name} - {pastor_name}"
+                elif church_name:
+                    formatted_entry = f"Pray for Local Pastor by Johnny Perry - {church_name}"
+                else:
+                    # Skip entries that don't have at least a church name
+                    continue
+                pastor_entries.append(formatted_entry)
+        
+        if not pastor_entries:
+            logger.error("No pastor entries found in pastor.md")
+            return {"status": "error", "procedure": "07", "error": "No pastor entries found"}
+        
+        logger.debug(f"Found {len(pastor_entries)} pastor entries.")
+        
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Find the current pastor prayer entry in the agenda
+        current_pastor_pattern = r"Pray for Local Pastor by Johnny Perry - .*"
+        current_pastor_match = re.search(current_pastor_pattern, agenda_content)
+        
+        if not current_pastor_match:
+            logger.error("Could not find current pastor prayer entry in agenda.")
+            return {"status": "error", "procedure": "07", "error": "Current pastor prayer entry not found"}
+        
+        current_pastor_entry = current_pastor_match.group(0).strip()
+        logger.info(f"Current pastor prayer entry: {current_pastor_entry}")
+        
+        try:
+            current_index = pastor_entries.index(current_pastor_entry)
+        except ValueError:
+            logger.warning(f"Current pastor entry '{current_pastor_entry}' not found in pastor.md. Starting from the beginning.")
+            current_index = -1 # Will make next_index 0
+            
+        next_index = (current_index + 1) % len(pastor_entries)
+        next_pastor_entry = pastor_entries[next_index]
+        
+        logger.info(f"Next pastor prayer entry: {next_pastor_entry}")
+        
+        updated_content = re.sub(current_pastor_pattern, next_pastor_entry, agenda_content)
+        NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+        
+        logger.info("Pastor prayer entry updated successfully.")
+        
+        return {"status": "success", "procedure": "07"}
+        
+    except Exception as e:
+        logger.error(f"Failed to handle pastor prayer: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "07", "error": str(e)}
 
 
 def procedure_08():
