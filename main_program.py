@@ -18,6 +18,16 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 
+
+def get_base_path():
+    """ Get the base path for the script, handling PyInstaller's temp folder. """
+    if getattr(sys, 'frozen', False):
+        # We are running in a bundle (executable)
+        return sys._MEIPASS
+    else:
+        # We are running in a normal Python environment
+        return os.path.dirname(os.path.abspath(__file__))
+    
 # Global variables for date management
 LAST_WEEK_DATE = None
 NEXT_WEEK_DATE = None
@@ -976,6 +986,30 @@ def procedure_20():
 
 
 def main():
+
+    # --- MAIN SCRIPT LOGIC ---
+
+    # 1. Define your paths correctly
+    # The executable's location (or the script's CWD)
+    # This is where 'myoutput' and 'mylog' will be created.
+    executable_path = os.path.dirname(sys.executable) if getattr(sys, 'frozen', False) else os.path.dirname(os.path.abspath(__file__))
+
+    # The path to your bundled data
+    data_path = os.path.join(get_base_path(), 'input')
+
+    # The paths for your output and logs
+    output_path = os.path.join(executable_path, 'output')
+    log_path = os.path.join(executable_path, 'logs')
+
+
+    # 2. Create output and log directories if they don't exist
+    os.makedirs(output_path, exist_ok=True)
+    os.makedirs(log_path, exist_ok=True)
+
+
+
+
+
     """Main program entry point."""
     logger = setup_logging()
     logger.info("=" * 60)
