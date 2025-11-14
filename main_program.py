@@ -329,12 +329,101 @@ def international_reading():
         return {"status": "error", "procedure": "04", "error": str(e)}
 
 
-def procedure_05():
-    """Initialize cache system."""
+def state_reading():
+    """Update State Reading for next week."""
+    import re
+    global NEXT_WEEK_DATE, NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 05: Initializing cache system")
-    logger.debug("Cache directory created successfully")
-    return {"status": "success", "procedure": "05"}
+    logger.info("Procedure 05: Updating State Reading")
+    logger.debug("Reading State schedule from fl.md")
+    
+    try:
+        if NEXT_WEEK_DATE is None or NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variables not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "05", "error": "Missing global variables"}
+        
+        # Read the state reading schedule
+        fl_file = Path("input/fl.md")
+        fl_content = fl_file.read_text()
+        
+        # Get the day number from NEXT_WEEK_DATE
+        day_number = NEXT_WEEK_DATE.day
+        
+        logger.debug(f"Looking for Day {day_number}")
+        
+        # Find the Day section in fl.md
+        day_pattern = rf"## Day {day_number}[^\n]*\s*\n(.*?)(?=\n---\n\n## Day|\n## Day|\Z)"
+        day_match = re.search(day_pattern, fl_content, re.DOTALL)
+        
+        if not day_match:
+            logger.error(f"Could not find Day {day_number} in fl.md")
+            return {"status": "error", "procedure": "05", "error": f"Day {day_number} not found"}
+        
+        day_content = day_match.group(1).strip()
+        
+        # Remove the closing "---" if present
+        day_content = re.sub(r'\n---\s*$', '', day_content)
+        
+        # Reformat the content to match the exact format required
+        # Extract the main heading (### line)
+        heading_match = re.search(r'###\s+(.+)', day_content)
+        if not heading_match:
+            logger.error("Could not find heading in Day content")
+            return {"status": "error", "procedure": "05", "error": "Heading not found"}
+        
+        heading = heading_match.group(1).strip()
+        
+        # Extract scripture reference (first occurrence)
+        scripture_match = re.search(r'\*([^*]+)\*', day_content)
+        scripture = scripture_match.group(0) if scripture_match else ""
+        
+        # Extract everything after the scripture reference
+        if scripture_match:
+            after_scripture_pos = scripture_match.end()
+            after_scripture = day_content[after_scripture_pos:].strip()
+        else:
+            after_scripture = ""
+        
+        # Build formatted output
+        formatted_lines = [heading]
+        
+        if after_scripture:
+            # Clean up - remove excess blank lines but keep single newlines
+            after_scripture = re.sub(r'\n\s*\n+', '\n', after_scripture)
+            formatted_lines.append(after_scripture)
+        
+        if scripture:
+            formatted_lines.append(scripture)
+        
+        new_state_reading = f"State Reading by Alvin Beverly\n" + "\n".join(formatted_lines)
+        
+        logger.info(f"Found State Reading for Day {day_number}")
+        logger.debug(f"Formatted content:\n{new_state_reading}")
+        
+        # Update the agenda file
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        
+        # Find and replace the State Reading section
+        # Pattern: from "State Reading by..." to the next main section
+        old_pattern = r"State Reading by [^\n]+\n.*?(?=\n\nPray for the Widows)"
+        
+        # Check if pattern exists
+        if re.search(old_pattern, agenda_content, re.DOTALL):
+            updated_content = re.sub(old_pattern, new_state_reading, agenda_content, flags=re.DOTALL)
+            NEXT_WEEK_AGENDA_FILE.write_text(updated_content)
+            
+            logger.info(f"Updated State Reading to Day {day_number}")
+            logger.debug("State reading updated successfully")
+        else:
+            logger.error("Could not find State Reading section to replace")
+            return {"status": "error", "procedure": "05", "error": "State Reading section not found"}
+        
+        return {"status": "success", "procedure": "05"}
+        
+    except Exception as e:
+        logger.error(f"Failed to update State Reading: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "05", "error": str(e)}
 
 
 def procedure_06():
@@ -465,7 +554,7 @@ def main():
     logger.info("=" * 60)
     
     procedures = [
-        init_file, bible_reading, prayer_card, international_reading, procedure_05,
+        init_file, bible_reading, prayer_card, international_reading, state_reading,
         procedure_06, procedure_07, procedure_08, procedure_09, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
