@@ -9,6 +9,8 @@ import logging
 import logging.handlers
 import os
 import sys
+import re
+import requests # Added for API calls
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -17,6 +19,60 @@ from pathlib import Path
 LAST_WEEK_DATE = None
 NEXT_WEEK_DATE = None
 NEXT_WEEK_AGENDA_FILE = None
+
+# List of all Bible book names for precise regex matching
+BIBLE_BOOK_NAMES = [
+    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
+    "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra",
+    "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon",
+    "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos",
+    "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah",
+    "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians",
+    "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians",
+    "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon",
+    "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude",
+    "Revelation"
+]
+
+def get_kjv_verse(reference):
+    """
+    Fetches KJV verses for a given Bible reference from bible-api.com.
+    Args:
+        reference (str): The Bible reference (e.g., "John 3:16", "Psalm 23").
+    Returns:
+        list: A list of verse strings, or an empty list if not found or error.
+    """
+    logger = logging.getLogger(__name__)
+    base_url = "https://bible-api.com/"
+    
+    # Encode the reference for URL
+    encoded_reference = requests.utils.quote(reference)
+    
+    api_url = f"{base_url}{encoded_reference}?translation=kjv"
+    
+    try:
+        response = requests.get(api_url, timeout=10)
+        response.raise_for_status() # Raise an exception for HTTP errors
+        data = response.json()
+        
+        verses = []
+        if 'verses' in data:
+            for verse_data in data['verses']:
+                verses.append(verse_data['text'].strip())
+        elif 'text' in data: # For single verse responses that might not be in 'verses' array
+            verses.append(data['text'].strip())
+            
+        return verses
+        
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error fetching KJV verse for '{reference}': {e}")
+        return []
+    except ValueError: # JSON decoding error
+        logger.error(f"JSON decoding error for '{reference}': {response.text}")
+        return []
+    except Exception as e:
+        logger.error(f"An unexpected error occurred for '{reference}': {e}")
+        return []
 
 
 def setup_logging():
@@ -631,10 +687,108 @@ def print_v1_6x():
 
 def kjv_verses():
     """Handle KJV verses for next week."""
+    import re
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
     logger.info("Procedure 09: Handling KJV Verses")
-    logger.debug("KJV verses processed")
-    return {"status": "success", "procedure": "09"}
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variable NEXT_WEEK_AGENDA_FILE not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "09", "error": "Missing global variable"}
+        
+        agenda_content = NEXT_WEEK_AGENDA_FILE.read_text()
+        updated_lines = []
+        
+        # Sort by length descending to match longer names first (e.g., "1 John" before "John")
+        book_names_sorted = sorted(BIBLE_BOOK_NAMES, key=len, reverse=True)
+        
+        book_pattern_parts = []
+        roman_numerals_map = {
+            "1": "I", "2": "II", "3": "III"
+        }
+
+        for name in book_names_sorted:
+            # Handle Arabic numeral prefix (e.g., "1 Samuel")
+            match_num_prefix = re.match(r'(\d+)\s+(.*)', name)
+            if match_num_prefix:
+                arabic_num = match_num_prefix.group(1)
+                book_rest = match_num_prefix.group(2)
+                
+                # Add Arabic numeral version
+                escaped_arabic = re.escape(name).replace(r'\ ', r'\s+')
+                if name.endswith('s'): # Make 's' optional for plural books
+                    escaped_arabic = escaped_arabic[:-1] + 's?'
+                book_pattern_parts.append(escaped_arabic)
+                
+                # Add Roman numeral version
+                if arabic_num in roman_numerals_map:
+                    roman_num = roman_numerals_map[arabic_num]
+                    roman_name = f"{roman_num} {book_rest}"
+                    escaped_roman = re.escape(roman_name).replace(r'\ ', r'\s+')
+                    if roman_name.endswith('s'): # Make 's' optional for plural books
+                        escaped_roman = escaped_roman[:-1] + 's?'
+                    book_pattern_parts.append(escaped_roman)
+            else:
+                # For books without numeral prefix (e.g., "John")
+                escaped_name = re.escape(name).replace(r'\ ', r'\s+')
+                if name.endswith('s'): # Make 's' optional for plural books
+                    escaped_name = escaped_name[:-1] + 's?'
+                book_pattern_parts.append(escaped_name)
+
+        book_pattern = '|'.join(book_pattern_parts)
+
+        # Final regex pattern for Bible references, capturing the full reference
+        # This pattern will capture the entire reference, including book, chapter, and optional verses.
+        # It allows for non-word characters before the reference.
+        bible_ref_pattern = re.compile(
+            r'\W*(' + book_pattern + r')\s+(\d+)(?::(\d+)(?:-(\d+))?)?', re.IGNORECASE
+        )
+        
+        lines = agenda_content.splitlines()
+        for line in lines:
+            updated_lines.append(line) # Always add the original line
+            
+            logger.debug(f"Line being processed: {line}")
+            
+            # Find all potential Bible references in the current line
+            # Using finditer to get all matches and their positions
+            for match in bible_ref_pattern.finditer(line):
+                # The actual Bible reference starts from group 1 (book name)
+                book = match.group(1)
+                chapter = match.group(2)
+                start_verse = match.group(3)
+                end_verse = match.group(4)
+
+                reference = f"{book} {chapter}"
+                if start_verse:
+                    reference += f":{start_verse}"
+                    if end_verse:
+                        reference += f"-{end_verse}"
+                
+                reference = reference.strip() # Clean up any extra spaces
+                
+                logger.debug(f"Found Bible reference: {reference}")
+                verses = get_kjv_verse(reference)
+                
+                if verses:
+                    for i, verse_text in enumerate(verses):
+                        updated_lines.append(f"{i+1}. {verse_text}")
+                    logger.info(f"Inserted KJV verses for {reference}")
+                else:
+                    logger.warning(f"Could not retrieve KJV verses for {reference}")
+        
+        # Join the updated lines and write back to the file
+        NEXT_WEEK_AGENDA_FILE.write_text("\n".join(updated_lines))
+        
+        logger.info("KJV verses processed and agenda updated successfully.")
+        
+        return {"status": "success", "procedure": "09"}
+        
+    except Exception as e:
+        logger.error(f"Failed to handle KJV verses: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "09", "error": str(e)}
 
 
 def procedure_10():

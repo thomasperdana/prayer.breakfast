@@ -1,0 +1,184 @@
+2025-11-13 20:34:47 - root - INFO - [main_program.py:844] - ============================================================
+2025-11-13 20:34:47 - root - INFO - [main_program.py:845] - Application Starting
+2025-11-13 20:34:47 - root - INFO - [main_program.py:846] - ============================================================
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 1 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:109] - Procedure 01: Initializing application configuration
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:110] - Loading default configuration values
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:122] - Protected input directory and files as read-only (555)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:123] - Set permissions to r-xr-xr-x for input directory
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:132] - Last week date: 2025-11-08
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:133] - Next week date: 2025-11-15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:141] - Removed existing file: 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:144] - Created next week agenda: 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:145] - Copied from input/2025-11-08 Saturday Prayer Breakfast Agenda.md to output/2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:149] - Changed file permissions to 777 (rwxrwxrwx)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:150] - File permissions updated for 2025-11-15 Saturday Prayer Breakfast Agenda.md
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:160] - Updated title from 'North Seminole County Gideons - 2025-11-08 Saturday Prayer Breakfast Agenda' to 'North Seminole County Gideons - 2025-11-15 Saturday Prayer Breakfast Agenda'
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:161] - File content updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 1 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 2 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:178] - Procedure 02: Updating Bible Reading Rotation
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:179] - Reading Bible rotation schedule from hq2.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:194] - Looking for reading for NOVEMBER 15
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:215] - Found Bible reading for NOVEMBER 15: Hebrews 11:1-19
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:227] - Updated Bible Reading Rotation to: Hebrews 11:1-19
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:228] - Bible reading rotation updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 2 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 3 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:243] - Procedure 03: Updating Prayer Card rotation
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:244] - Reading Prayer Card schedule from prayer.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:269] - Current prayer card page: 37, next page: 38
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:294] - Next prayer card: Prayer Card Together - Page 38 II—STUDYING: 4. II Timothy 3:16-17
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:301] - Updated Prayer Card from Page 37 to Page 38
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:302] - Prayer card rotation updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 3 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 4 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:317] - Procedure 04: Updating International Reading
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:318] - Reading International schedule from hq1.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:332] - Looking for DAY 15
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:344] - Found International Reading for DAY 15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:345] - Content length: 620 characters
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:361] - Updated International Reading to DAY 15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:362] - International reading updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 4 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 5 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:380] - Procedure 05: Updating State Reading
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:381] - Reading State schedule from fl.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:395] - Looking for Day 15
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:443] - Found State Reading for Day 15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:444] - Formatted content:
+State Reading by Alvin Beverly
+Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR
+**Area Directors:**
+- **SE09** - Jack Walton (Diane)
+- **SE12** - Mike McGarrigle (Lisa)
+- **SE17** - Stephen Cornwell (Carol)
+- **SE18** - Joseph Tang
+- **SE19** - Javier Morejon (Christie)
+**Camps:** Palm Beach Central, Palm Beach North
+*Psalm 19:7-8*
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:458] - Updated State Reading to Day 15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:459] - State reading updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 5 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 6 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:477] - Procedure 06: Updating Widow Prayer
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:478] - Reading Widow schedule from widow.md
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:492] - Looking for section 15
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:531] - Found Widow Prayer for section 15: Southeast Region – SE12 (cont'd)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:532] - Formatted content:
+Pray for the Widows by Donald Tise - 15. Southeast Region – SE12 (cont'd)
+Indian River - Patricia Dodson, Rachel Meeks,  - Melbourne/Viera - Blanche Lorber, Brenda Ollis,  - Palm Bay - Harriet Wall, 
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:545] - Updated Widow Prayer to section 15
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:546] - Widow prayer updated successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 6 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 7 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:564] - Procedure 07: Handling Pastor Prayer
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:599] - Found 79 pastor entries.
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:612] - Current pastor prayer entry: Pray for Local Pastor by Johnny Perry - New Mt. Calvary Baptist Church - Rev. G.W. Warren
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:623] - Next pastor prayer entry: Pray for Local Pastor by Johnny Perry - New Tribes Mission Homes Chapel or Ethnos 360 - Chaplain Daniel Royer
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:628] - Pastor prayer entry updated successfully.
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 7 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 8 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:643] - Procedure 08: Printing NEXT_WEEK_AGENDA_FILE six times
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 1/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 1): request id is HP_Officejet_4620_series-137 (1 file(s))
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 2/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 2): request id is HP_Officejet_4620_series-138 (1 file(s))
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 3/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 3): request id is HP_Officejet_4620_series-139 (1 file(s))
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 4/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 4): request id is HP_Officejet_4620_series-140 (1 file(s))
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 5/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 5): request id is HP_Officejet_4620_series-141 (1 file(s))
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:653] - Printing /Volumes/181TB/repos/prayer.breakfast/output/2025-11-15 Saturday Prayer Breakfast Agenda.md (iteration 6/6)
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:663] - Print command output (iteration 6): request id is HP_Officejet_4620_series-142 (1 file(s))
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:665] - NEXT_WEEK_AGENDA_FILE printed six times successfully.
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:867] - Procedure 8 completed successfully
+2025-11-13 20:34:47 - root - DEBUG - [main_program.py:861] - Executing procedure 9 of 20
+2025-11-13 20:34:47 - __main__ - INFO - [main_program.py:680] - Procedure 09: Handling KJV Verses
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:710] - Skipping Bible Reading Rotation reference: Hebrews 11:1-19
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:713] - Skipping Prayer Card Together reference: Page 38
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:713] - Skipping Prayer Card Together reference: Timothy 3:16-17
+2025-11-13 20:34:47 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: Zone 10
+2025-11-13 20:34:47 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:48 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /Zone%2010?translation=kjv HTTP/1.1" 404 21
+2025-11-13 20:34:48 - __main__ - ERROR - [main_program.py:54] - Error fetching KJV verse for 'Zone 10': 404 Client Error: Not Found for url: https://bible-api.com/Zone%2010?translation=kjv
+2025-11-13 20:34:48 - __main__ - WARNING - [main_program.py:739] - Could not retrieve KJV verses for Zone 10
+2025-11-13 20:34:48 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: Zone 11
+2025-11-13 20:34:48 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:48 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /Zone%2011?translation=kjv HTTP/1.1" 404 21
+2025-11-13 20:34:48 - __main__ - ERROR - [main_program.py:54] - Error fetching KJV verse for 'Zone 11': 404 Client Error: Not Found for url: https://bible-api.com/Zone%2011?translation=kjv
+2025-11-13 20:34:48 - __main__ - WARNING - [main_program.py:739] - Could not retrieve KJV verses for Zone 11
+2025-11-13 20:34:48 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: Zone 10
+2025-11-13 20:34:48 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /Zone%2010?translation=kjv HTTP/1.1" 404 21
+2025-11-13 20:34:49 - __main__ - ERROR - [main_program.py:54] - Error fetching KJV verse for 'Zone 10': 404 Client Error: Not Found for url: https://bible-api.com/Zone%2010?translation=kjv
+2025-11-13 20:34:49 - __main__ - WARNING - [main_program.py:739] - Could not retrieve KJV verses for Zone 10
+2025-11-13 20:34:49 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: Zone 11
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /Zone%2011?translation=kjv HTTP/1.1" 404 21
+2025-11-13 20:34:49 - __main__ - ERROR - [main_program.py:54] - Error fetching KJV verse for 'Zone 11': 404 Client Error: Not Found for url: https://bible-api.com/Zone%2011?translation=kjv
+2025-11-13 20:34:49 - __main__ - WARNING - [main_program.py:739] - Could not retrieve KJV verses for Zone 11
+2025-11-13 20:34:49 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: 2 CORINTHIANS 6:14-18
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /2%20CORINTHIANS%206%3A14-18?translation=kjv HTTP/1.1" 200 None
+2025-11-13 20:34:49 - __main__ - INFO - [main_program.py:737] - Inserted KJV verses for 2 CORINTHIANS 6:14-18
+2025-11-13 20:34:49 - __main__ - DEBUG - [main_program.py:728] - Found Bible reference: Psalm 19:7-8
+2025-11-13 20:34:49 - urllib3.connectionpool - DEBUG - [connectionpool.py:1049] - Starting new HTTPS connection (1): bible-api.com:443
+2025-11-13 20:34:50 - urllib3.connectionpool - DEBUG - [connectionpool.py:544] - https://bible-api.com:443 "GET /Psalm%2019%3A7-8?translation=kjv HTTP/1.1" 200 762
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:737] - Inserted KJV verses for Psalm 19:7-8
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:725] - Skipping Pastor Prayer reference: Ethnos 360
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:744] - KJV verses processed and agenda updated successfully.
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 9 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 10 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:756] - Procedure 10: Setting up notification system
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:757] - Notification channels configured
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 10 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 11 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:764] - Procedure 11: Initializing background tasks
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:765] - Task scheduler started
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 11 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 12 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:772] - Procedure 12: Setting up monitoring system
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:773] - Performance metrics enabled
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 12 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 13 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:780] - Procedure 13: Loading plugins and extensions
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:781] - Plugin directory scanned
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 13 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 14 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:788] - Procedure 14: Initializing session management
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:789] - Session storage configured
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 14 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 15 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:796] - Procedure 15: Setting up error handling
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:797] - Global exception handler registered
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 15 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 16 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:804] - Procedure 16: Loading resource files
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:805] - Static resources indexed
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 16 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 17 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:812] - Procedure 17: Initializing data validation
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:813] - Validation rules compiled
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 17 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 18 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:820] - Procedure 18: Setting up backup system
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:821] - Backup schedule configured
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 18 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 19 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:828] - Procedure 19: Initializing analytics
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:829] - Analytics endpoints ready
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 19 completed successfully
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:861] - Executing procedure 20 of 20
+2025-11-13 20:34:50 - __main__ - INFO - [main_program.py:836] - Procedure 20: Finalizing startup sequence
+2025-11-13 20:34:50 - __main__ - DEBUG - [main_program.py:837] - All systems operational
+2025-11-13 20:34:50 - root - DEBUG - [main_program.py:867] - Procedure 20 completed successfully
+2025-11-13 20:34:50 - root - INFO - [main_program.py:877] - ============================================================
+2025-11-13 20:34:50 - root - INFO - [main_program.py:878] - Execution Summary
+2025-11-13 20:34:50 - root - INFO - [main_program.py:879] - ============================================================
+2025-11-13 20:34:50 - root - INFO - [main_program.py:880] - Total Procedures: 20
+2025-11-13 20:34:50 - root - INFO - [main_program.py:881] - Successful: 20
+2025-11-13 20:34:50 - root - INFO - [main_program.py:882] - Failed: 0
+2025-11-13 20:34:50 - root - INFO - [main_program.py:883] - ============================================================
+2025-11-13 20:34:50 - root - INFO - [main_program.py:886] - Application started successfully!
