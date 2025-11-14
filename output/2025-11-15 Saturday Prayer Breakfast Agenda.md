@@ -20,9 +20,9 @@ Adrian Roman (ELDAA) - STATE REGIONAL DIRECTOR
 **Camps:** Palm Beach Central, Palm Beach North
 *Psalm 19:7-8*
 
-Pray for the Widows by Donald Tise - 8. North Region – NO8
-Citrus County - Michelle Dedrick, Rita Flesher, Celete Jumper, Vera Persechino, - Golden Triangle - Eleanor Rosselle, - Leesburg - Judy Emery, Myra Guess, Dawn Haas, Wanda Helmick, Kathleen Orr, Rebecca Weaver, 
+Pray for the Widows by Donald Tise - 15. Southeast Region – SE12 (cont'd)
+Indian River - Patricia Dodson, Rachel Meeks,  - Melbourne/Viera - Blanche Lorber, Brenda Ollis,  - Palm Bay - Harriet Wall, 
 
-Pray for Local Pastor by Johnny Perry - New Mt. Calvary Baptist Church - Rev. G.W. Warren
+Pray for Local Pastor by Johnny Perry - New Tribes Mission Homes Chapel or Ethnos 360 - Chaplain Daniel Royer
 
 Prayer Request, Prayer Rotation, Closing Prayer by TaeWoo Lee, Food and Fellowship
