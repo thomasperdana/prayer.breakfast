@@ -592,11 +592,11 @@ def pastor_prayer():
         return {"status": "error", "procedure": "07", "error": str(e)}
 
 
-def procedure_08():
-    """Initialize API connections."""
+def print_v1_6x():
+    """Print version 1.6x information."""
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 08: Initializing API connections")
-    logger.debug("API endpoints configured")
+    logger.info("Procedure 08: Printing v1.6x information")
+    logger.debug("v1.6x details retrieved")
     return {"status": "success", "procedure": "08"}
 
 
@@ -705,7 +705,7 @@ def main():
     
     procedures = [
         init_file, bible_reading, prayer_card, international_reading, state_reading,
-        widow_prayer, pastor_prayer, procedure_08, procedure_09, procedure_10,
+        widow_prayer, pastor_prayer, print_v1_6x, procedure_09, procedure_10,
         procedure_11, procedure_12, procedure_13, procedure_14, procedure_15,
         procedure_16, procedure_17, procedure_18, procedure_19, procedure_20
     ]
