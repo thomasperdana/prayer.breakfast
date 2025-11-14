@@ -594,10 +594,39 @@ def pastor_prayer():
 
 def print_v1_6x():
     """Print version 1.6x information."""
+    import subprocess
+    global NEXT_WEEK_AGENDA_FILE
+    
     logger = logging.getLogger(__name__)
-    logger.info("Procedure 08: Printing v1.6x information")
-    logger.debug("v1.6x details retrieved")
-    return {"status": "success", "procedure": "08"}
+    logger.info("Procedure 08: Printing NEXT_WEEK_AGENDA_FILE six times")
+    
+    try:
+        if NEXT_WEEK_AGENDA_FILE is None:
+            logger.error("Global variable NEXT_WEEK_AGENDA_FILE not initialized. Run init_file first.")
+            return {"status": "error", "procedure": "08", "error": "Missing global variable"}
+        
+        file_to_print = NEXT_WEEK_AGENDA_FILE.resolve() # Get absolute path
+        
+        for i in range(6):
+            logger.debug(f"Printing {file_to_print} (iteration {i+1}/6)")
+            # Using 'lp' command for printing on macOS/Linux
+            # -o raw: print file without filtering (useful for markdown files)
+            # -n 1: print 1 copy
+            result = subprocess.run(['lp', '-n', '1', str(file_to_print)], capture_output=True, text=True, check=False)
+            
+            if result.returncode != 0:
+                logger.error(f"Printing failed on iteration {i+1}: {result.stderr.strip()}")
+                return {"status": "error", "procedure": "08", "error": f"Printing failed: {result.stderr.strip()}"}
+            else:
+                logger.debug(f"Print command output (iteration {i+1}): {result.stdout.strip()}")
+        
+        logger.info("NEXT_WEEK_AGENDA_FILE printed six times successfully.")
+        
+        return {"status": "success", "procedure": "08"}
+        
+    except Exception as e:
+        logger.error(f"Failed to print NEXT_WEEK_AGENDA_FILE: {str(e)}", exc_info=True)
+        return {"status": "error", "procedure": "08", "error": str(e)}
 
 
 def procedure_09():
