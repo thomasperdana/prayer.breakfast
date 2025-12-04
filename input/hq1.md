@@ -90,4 +90,3 @@ The Prayer & Personal Witnessing Program. A Prayer and Personal Witnessing objec
 
 ## **DAY 31**
 Former International, National, State, and Camp Gideon and Auxiliary Officers. That the Lord will continue to use former officers to His honor and glory. Pray for leadership succession at all levels, from camps to the International Cabinet. Gideons and Auxiliary from Northern Mariana Islands, Palau, Papua New Guinea, Samoa, Singapore, Solomon Islands, Timor-Leste, Tonga, Tuvalu, and Vanuatu. The salvation of souls from personal witnessing and Scriptures distributed. 1 PETER 4:10
-

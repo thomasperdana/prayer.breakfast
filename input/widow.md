@@ -1,7 +1,3 @@
-# Florida Association - Widows Daily Prayer Calendar 2025-2026
-
-**"Honor widows" - 1 TIMOTHY 5:3**
-
 ---
 
 ## State Chaplain
@@ -291,37 +287,3 @@ Orlando, FL 32828
 ### 31. New Widows & All Widowers
 
 ---
-
-## Our Seven Spiritual Objectives
-
-### Men & Women of the Book
-- **READ** • 1 TIMOTHY 4:13
-- **STUDY** • 2 TIMOTHY 2:15
-- **MEMORIZE** • DEUTERONOMY 11:18
-
-### Men & Women of Prayer
-- 1 SAMUEL 12:23 • EPHESIANS 6:18
-- PHILIPPIANS 4:6
-
-### Men & Women of Faith
-- EPHESIANS 2:8-9
-- HEBREW 11:6 • 2 CORINTHIANS 5:7
-
-### Men & Women of Separated Walk
-- 2 CORINTHIANS 6:14-18 • ROMANS 16:17-18
-- EPHESIANS 5:15
-
-### Men & Women Who Witness
-- ACTS 1:8 • PROVERBS 11:30
-- 2 CORINTHIANS 4:13
-
-### Men & Women of Compassionate Heart
-- MATTHEW 9:36 • PSALM 86:15 • 1 PETER 3:8
-
-### Men & Women Who Give
-- 2 CORINTHIANS 8:5, 8, 24
-- 1 CHRONICLES 29:11-14 • 2 CORINTHIANS 9:7
-
----
-
-*Document converted from PDF to Markdown format*

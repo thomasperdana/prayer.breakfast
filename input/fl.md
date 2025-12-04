@@ -1,33 +1,3 @@
-# Florida State Prayer Calendar 2025-2026
-
-**Florida Association Daily Prayer Calendar**  
-**Faith in Action - Colossians 3:23-24**
-
----
-
-## Our Seven Spiritual Objectives
-- Men & Women of the Book
-- Men & Women of Faith
-- Men & Women of Prayer
-- Men & Women of Separated Walk
-- Men & Women of Compassionate Heart
-- Men & Women who Witness
-- Men & Women who Give
-
----
-
-## STATE CHAPLAIN
-**Victor Rivera**  
-Cell: (407) 497-6850  
-Email: gideonvic1@gmail.com
-
-## STATE AUXILIARY CHAPLAIN
-**Debbie Rivera**  
-Cell: (239) 331-1481  
-Email: giftalent1@gmail.com
-
-**Address:** 2463 Guiana Plum Drive, Orlando, FL 32828
-
 ---
 
 ## Day 1 - Pray for the elected state cabinets
@@ -475,5 +445,3 @@ Hilton University of Florida Hotel & Conference Center
 **Camps:** Lee County East, Lee County North, Lee County South
 
 ---
-
-*This prayer calendar is designed to guide daily prayers for the Florida Gideons International organization, its leadership, programs, and ministry efforts throughout 2025-2026.*
