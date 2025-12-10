@@ -6,6 +6,27 @@ smtp app password:
 ktnd vioj bxxu aika
 qE7!sP9*bK2@zX4#
 python3 main_program.py
+
+
+
+
+VITE_SUPABASE_URL="https://eavwtnknfopwmjpseagy.supabase.co"
+VITE_SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhdnd0bmtuZm9wd21qcHNlYWd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4MjIzMjUsImV4cCI6MjA4MDM5ODMyNX0.uyovTXpZTNWdpCy3ImMqXwgVPPQtfG0XXBpKu0G-Ky8"
+VITE_SUPABASE_SERVICE_ROLE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhdnd0bmtuZm9wd21qcHNlYWd5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NDgyMjMyNSwiZXhwIjoyMDgwMzk4MzI1fQ.Qi9JjCqf3NpV5rLPo5ue9OExrjSuAWXCFAOork9eniE"
+VITE_SUPABASE_OWNER_ID="aece4bd8-5b19-4a4d-aba8-98d3efe27936"
+VERCEL_CRON_SECRET="zkJ5v9M2xQ8rL1wT4n6P7qR8sT9uV2wX3yZ0a1bC2dE3fG4hI5jK6l"
+NEXT_PUBLIC_URL="https://bos-gideon-agenda.vercel.app/"
+EMAIL_1="gideon.northseminole@gmail.com; thomasperdana@gmail.com"
+EMAIL_3="gideon.northseminole@gmail.com; thomasperdana@gmail.com"
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=587 # Using TLS port
+SMTP_SECURE=TRUE
+SMTP_USER="ThomasPerdana@gmail.com"
+SMTP_PASS="ktnd vioj bxxu aika" # User's Gmail App Password
+SMTP_FROM="ThomasPerdana@gmail.com"
+
+
+
 """
 
 import logging
